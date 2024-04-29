@@ -13,7 +13,6 @@ import org.apache.logging.log4j.core.jmx.Server;
 
 public class DropAllHeadsAtWorldSpawn {
     public static void SpawnHeads(ServerWorld world) {
-
         getAllHeads(world);
     }
 
@@ -21,8 +20,12 @@ public class DropAllHeadsAtWorldSpawn {
         ItemStack[] itemStacks = new ItemStack[Registries.ITEM.size()];
         int index = 0;
         for (Identifier itemId : Registries.ITEM.getIds()) {
-            itemStacks[index] = new ItemStack(Registries.ITEM.get(itemId));
-            index++;
+			ItemStack item = new ItemStack(Registries.ITEM.get(itemId));
+			ZombieSurvival.LOGGER.info(item.getName().getString());
+			if (!item.getName().getString().equalsIgnoreCase("Orbital Strike")) {
+				itemStacks[index] = item;
+				index++;
+			}
         }
         return itemStacks;
     }

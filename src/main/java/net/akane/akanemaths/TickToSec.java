@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.akanemaths;
+package net.akane.akanemaths;
 
 public class TickToSec {
     private final int number;

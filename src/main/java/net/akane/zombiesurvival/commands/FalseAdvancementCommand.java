@@ -14,11 +14,12 @@ public class FalseAdvancementCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 literal("falseadvancement")
-                        .then(argument("player", StringArgumentType.string())
-                                .then(argument("advancement", StringArgumentType.string())
-                                        .executes(FalseAdvancementCommand::execute)
-                                )
-                        )
+					.requires(source -> source.hasPermissionLevel(2))
+					.then(argument("player", StringArgumentType.string())
+							.then(argument("advancement", StringArgumentType.string())
+									.executes(FalseAdvancementCommand::execute)
+							)
+					)
         );
     }
 

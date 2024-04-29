@@ -19,7 +19,8 @@
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "net.akane.zombiesurvival.ZombieSurvival"
+			"init": "net.akane.zombiesurvival.ZombieSurvival",
+			"client_init": "net.akane.zombiesurvival.client.ZombieSurvivalClient"
 		},
 		"depends": [
 			{

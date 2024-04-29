@@ -8,7 +8,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.command.argument.GameProfileArgumentType;
 import net.minecraft.entity.Entity;
@@ -53,7 +52,7 @@ public class GiveSkullCommand {
     }
 
 
-    public static int execute(CommandContext<ServerCommandSource> context) throws CommandException, CommandSyntaxException {
+    public static int execute(CommandContext<ServerCommandSource> context) throws CommandSyntaxException, CommandSyntaxException {
         Collection<? extends Entity> targets = EntityArgumentType.getEntities(context, "targets");
         for (Entity entity : targets) {
             ItemStack skull = createSkull(entity);

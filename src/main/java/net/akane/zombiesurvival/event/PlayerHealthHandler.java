@@ -1,7 +1,7 @@
 package net.akane.zombiesurvival.event;
 
 import net.akane.zombiesurvival.ZombieSurvival;
-import net.akane.zombiesurvival.akanedata.DataArray;
+import net.akane.akanedata.DataArray;
 import net.minecraft.entity.player.PlayerEntity;
 
 import java.io.*;

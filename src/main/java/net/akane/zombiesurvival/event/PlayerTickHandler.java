@@ -1,8 +1,11 @@
 package net.akane.zombiesurvival.event;
 
 import com.mojang.authlib.GameProfile;
+import net.akane.zombiesurvival.Powers.GoThroughWalls.Ghost;
 import net.akane.zombiesurvival.ZombieSurvival;
-import net.akane.zombiesurvival.akanedata.DataArray;
+import net.akane.akanedata.DataArray;
+import net.akane.akanemaths.SecToTick;
+import net.akane.zombiesurvival.everyoneAllatonce.GetAllPlayerLocation;
 import net.akane.zombiesurvival.util.IEntityDataSaver;
 import net.akane.zombiesurvival.util.PowerData;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -18,8 +21,6 @@ import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.message.MessageType;
-import net.minecraft.network.message.SentMessage;
-import net.minecraft.network.message.SignedMessage;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -31,11 +32,13 @@ import java.util.UUID;
 
 public class PlayerTickHandler implements ServerTickEvents.StartTick{
     public Integer maxEnchantmentLevel = 127;
+	private SecToTick cooldown = new SecToTick(10);
+	private int cooldownint = cooldown.GetTicks();
     @Override
     public void onStartTick(MinecraftServer server) {
         for(ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
             if (player != null) {
-                for (String tag : player.getCommandTags()) {
+                for (String tag : player.getScoreboardTags()) {
                     if (tag.equalsIgnoreCase("ElytraForever")) {
                         player.fallDistance = 0.0f;
                         PlayerInventory inventory = player.getInventory();
@@ -49,8 +52,14 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
                         }
                     }
                 }
-                PowerData.TickCooldown((IEntityDataSaver) player);
             }
+			if (cooldownint <= 0) {
+				GetAllPlayerLocation.getLocation(server);
+				cooldownint = cooldown.GetTicks();
+			}
+			else {
+				cooldownint -= 1;
+			}
         }
     }
 }

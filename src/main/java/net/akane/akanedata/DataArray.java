@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.akanedata;
+package net.akane.akanedata;
 
 import java.util.UUID;
 

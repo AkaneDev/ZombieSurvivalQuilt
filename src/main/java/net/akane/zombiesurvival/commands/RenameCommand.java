@@ -16,9 +16,10 @@ public class RenameCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 literal("rename")
-                        .then(argument("name", StringArgumentType.string())
-                                .executes(RenameCommand::renameItem)
-                        )
+					.requires(source -> source.hasPermissionLevel(2))
+					.then(argument("name", StringArgumentType.string())
+							.executes(RenameCommand::renameItem)
+					)
         );
     }
 

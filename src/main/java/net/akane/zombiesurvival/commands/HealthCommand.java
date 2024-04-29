@@ -8,7 +8,6 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.akane.zombiesurvival.event.PlayerHealthHandler;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -31,15 +30,16 @@ public class HealthCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 literal("health")
-                        .then(argument("targets", EntityArgumentType.players())
-                                .then(argument("amount", FloatArgumentType.floatArg())
-                                        .executes(HealthCommand::execute)
-                                )
-                        )
+					.requires(source -> source.hasPermissionLevel(2))
+					.then(argument("targets", EntityArgumentType.players())
+						.then(argument("amount", FloatArgumentType.floatArg())
+							.executes(HealthCommand::execute)
+						)
+					)
         );
     }
 
-    public static int execute(CommandContext<ServerCommandSource> context) throws CommandException, CommandSyntaxException {
+    public static int execute(CommandContext<ServerCommandSource> context) throws CommandSyntaxException, CommandSyntaxException {
         Collection<? extends Entity> targets = EntityArgumentType.getEntities(context, "targets");
         double amount = FloatArgumentType.getFloat(context, "amount");
         for (Entity entity : targets) {

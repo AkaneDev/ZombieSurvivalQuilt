@@ -5,28 +5,21 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.mob.GiantEntity;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.decoration.ArmorStandEntity;
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.mob.ZombifiedPiglinEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
 import java.util.UUID;
-import java.util.function.Predicate;
 
-public class giant_ai extends GiantEntity {
+public class giant_ai_moreHP extends GiantEntity {
 
     private static final UUID BABY_SPEED_ID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
     public static final float field_30519 = 0.05F;
@@ -39,7 +32,7 @@ public class giant_ai extends GiantEntity {
     private int inWaterTime;
     private int ticksUntilWaterConversion;
 
-    public giant_ai(EntityType<? extends GiantEntity> entityType, World world) {
+    public giant_ai_moreHP(EntityType<? extends GiantEntity> entityType, World world) {
         super(EntityType.GIANT, world);
     }
     protected void initGoals() {
@@ -62,8 +55,8 @@ public class giant_ai extends GiantEntity {
     }
 
     public static DefaultAttributeContainer.Builder createGiantAttributes() {
-        double health = 150.0;
-        return HostileEntity.createAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, health).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.005).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 350.0);
+        double health = 3200000000.00;
+        return HostileEntity.createAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, health).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.05).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 25.0);
     }
 
 	public float getPathfindingFavor(BlockPos pos, WorldView world) {
