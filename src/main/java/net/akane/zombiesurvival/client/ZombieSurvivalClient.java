@@ -2,21 +2,14 @@ package net.akane.zombiesurvival.client;
 
 import com.mojang.blaze3d.platform.InputUtil;
 //import io.github.apace100.apoli.ApoliClient;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.akane.zombiesurvival.Powers.GoThroughWalls.Ghost;
 import net.akane.zombiesurvival.ZombieSurvival;
 import net.akane.zombiesurvival.client.commands.ScoreBoardClientCommand;
-import net.akane.zombiesurvival.commands.ScoreBoardTagListCommand;
-import net.akane.zombiesurvival.networking.C2S.C2Ssetgamemode;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBind;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.item.ElytraItem;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
@@ -24,7 +17,6 @@ import org.quiltmc.qsl.command.api.client.ClientCommandManager;
 import org.quiltmc.qsl.command.api.client.ClientCommandRegistrationCallback;
 import org.quiltmc.qsl.lifecycle.api.client.event.ClientTickEvents;
 import net.akane.akanemaths.SecToTick;
-import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
 
 public class ZombieSurvivalClient implements ClientModInitializer {
     public static KeyBind usePrimaryActivePowerKeybind;

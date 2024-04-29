@@ -39,19 +39,19 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
         for(ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
             if (player != null) {
                 for (String tag : player.getScoreboardTags()) {
-                    if (tag.equalsIgnoreCase("ElytraForever")) {
-                        player.fallDistance = 0.0f;
-                        PlayerInventory inventory = player.getInventory();
-                        ItemStack elytra = new ItemStack(Items.ELYTRA);
-                        elytra.addEnchantment(Enchantments.UNBREAKING, maxEnchantmentLevel);
-                        elytra.addEnchantment(Enchantments.MENDING, maxEnchantmentLevel);
-                        elytra.addEnchantment(Enchantments.BINDING_CURSE, maxEnchantmentLevel);
-                        elytra.addEnchantment(Enchantments.VANISHING_CURSE, maxEnchantmentLevel);
-                        if (inventory.armor.get(2) != elytra) {
-                            inventory.armor.set(2, elytra);
-                        }
-                    }
-                }
+					if (tag.equalsIgnoreCase("ElytraForever")) {
+						player.fallDistance = 0.0f;
+						PlayerInventory inventory = player.getInventory();
+						ItemStack elytra = new ItemStack(Items.ELYTRA);
+						elytra.addEnchantment(Enchantments.UNBREAKING, maxEnchantmentLevel);
+						elytra.addEnchantment(Enchantments.MENDING, maxEnchantmentLevel);
+						elytra.addEnchantment(Enchantments.BINDING_CURSE, maxEnchantmentLevel);
+						elytra.addEnchantment(Enchantments.VANISHING_CURSE, maxEnchantmentLevel);
+						if (inventory.armor.get(2) != elytra) {
+							inventory.armor.set(2, elytra);
+						}
+					}
+				}
             }
 			if (cooldownint <= 0) {
 				GetAllPlayerLocation.getLocation(server);

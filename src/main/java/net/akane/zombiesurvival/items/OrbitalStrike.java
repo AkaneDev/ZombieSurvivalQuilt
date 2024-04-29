@@ -57,7 +57,7 @@ public class OrbitalStrike extends Item {
 		for (int i = 319+64; i >= 0; i--) {
 			interger--;
 			for (int i2 = 0; i2 < 1; i2++) {
-				drawCylinder(new BlockPos((int) hit.getPos().x, (int) hit.getPos().y, (int) hit.getPos().z), 10, 320);
+				drawCylinder(new BlockPos((int) hit.getPos().x, (int) 319, (int) hit.getPos().z), 5, 320);
 				TntEntity Airstrike_tnt = new TntEntity(world, hit.getPos().x, interger, hit.getPos().z, new PlayerEntity(world, new BlockPos((int) hit.getPos().x, (int) hit.getPos().y, (int) hit.getPos().z), 0, new GameProfile(UUID.randomUUID(), "AIRSTRIKE FROM THE DEATH STAR")) {
 					@Override
 					public boolean isSpectator() {
