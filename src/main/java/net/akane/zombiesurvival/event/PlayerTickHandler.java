@@ -54,7 +54,7 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
 				}
             }
 			if (cooldownint <= 0) {
-				GetAllPlayerLocation.getLocation(server);
+//				GetAllPlayerLocation.getLocation(server);
 				cooldownint = cooldown.GetTicks();
 			}
 			else {
