@@ -1,8 +1,11 @@
 package net.akane.zombiesurvival.util;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.boss.BossBar;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
+
+import java.lang.reflect.Array;
 
 public class ShapeDrawer {
 	public static void drawCylinder(BlockPos startPos, int radius, int heightLimit) {
@@ -27,13 +30,18 @@ public class ShapeDrawer {
 		}
 	}
 
-	public static void drawSphere(BlockPos startPos, int radius, int heightLimit) {
+	/**
+	 * @param startPos Position Of center of Sphere
+	 * @param radius Radius of Sphere
+	 * @param color Color, Not Implemented
+	 */
+	public static void drawSphere(BlockPos startPos, int radius, float[] color) {
 		MinecraftClient client = MinecraftClient.getInstance();
 
 		// Center coordinates of the sphere
-		double centerX = 0;
-		double centerY = 0;
-		double centerZ = 0;
+		double centerX = startPos.getX();
+		double centerY = startPos.getY();
+		double centerZ = startPos.getZ();
 
 
 		// Density of particles (number of particles per unit distance)
