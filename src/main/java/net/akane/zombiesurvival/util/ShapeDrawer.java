@@ -53,7 +53,7 @@ public class ShapeDrawer {
 				double y = centerY + radius * Math.sin(phi) * Math.sin(theta);
 				double z = centerZ + radius * Math.cos(phi);
 
-				client.world.addParticle(ParticleTypes.ANGRY_VILLAGER, x, y, z, 0.0, 0.0, 0.0);
+				client.world.addParticle(ParticleTypes.FLAME, x, y, z, 0.0, 0.0, 0.0);
 			}
 		}
 	}
