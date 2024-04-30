@@ -35,7 +35,7 @@ public class ShapeDrawer {
 	 * @param radius Radius of Sphere
 	 * @param color Color, Not Implemented
 	 */
-	public static void drawSphere(BlockPos startPos, int radius, float[] color) {
+	public static void drawSphere(BlockPos startPos, float radius, float[] color) {
 		MinecraftClient client = MinecraftClient.getInstance();
 
 		// Center coordinates of the sphere
@@ -53,9 +53,8 @@ public class ShapeDrawer {
 				double y = centerY + radius * Math.sin(phi) * Math.sin(theta);
 				double z = centerZ + radius * Math.cos(phi);
 
-				client.world.addParticle(ParticleTypes.ASH, x, y, z, 0.0, 0.0, 0.0);
+				client.world.addParticle(ParticleTypes.ANGRY_VILLAGER, x, y, z, 0.0, 0.0, 0.0);
 			}
 		}
 	}
-
 }
