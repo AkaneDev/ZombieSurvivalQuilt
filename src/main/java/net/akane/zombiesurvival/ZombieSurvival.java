@@ -76,6 +76,7 @@ public class ZombieSurvival implements ModInitializer {
 		PlayerHealthHandler.GenerateFolderAndFiles();
 		start_Random_Block_Drops.register();
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, dedicated1) -> {
+			spheretest.register(dispatcher);
 			calc.register(dispatcher);
 			GiveSkullCommand.register(dispatcher);
 			HealthCommand.register(dispatcher);
