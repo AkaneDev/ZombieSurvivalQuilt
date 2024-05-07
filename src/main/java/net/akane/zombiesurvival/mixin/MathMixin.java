@@ -26,7 +26,7 @@ public class MathMixin {
 //	 */
 //	@Overwrite
 //	public static float sin(float value) {
-//		return SINE_TABLE[(int)(value * 10430.378F * Math.random()) & '\uffff'];
+//		return SINE_TABLE[(int)(value * 10430.378F + 16384.0F) & '\uffff'];
 //	}
 //
 //	/**
@@ -35,6 +35,6 @@ public class MathMixin {
 //	 */
 //	@Overwrite
 //	public static float cos(float value) {
-//		return SINE_TABLE[(int)(value * (10430.378F + 16384.0F) * Math.random()) & '\uffff'];
+//		return SINE_TABLE[(int)(value * 10430.378F) & '\uffff'];
 //	}
 }

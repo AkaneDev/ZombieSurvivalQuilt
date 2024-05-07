@@ -1,11 +1,23 @@
 package net.akane.zombiesurvival.util;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormats;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import java.lang.reflect.Array;
+import java.util.function.Function;
 
 public class ShapeDrawer {
 	public static void drawCylinder(BlockPos startPos, int radius, int heightLimit) {
@@ -35,7 +47,7 @@ public class ShapeDrawer {
 	 * @param radius Radius of Sphere
 	 * @param color Color, Not Implemented
 	 */
-	public static void drawSphere(BlockPos startPos, float radius, float[] color) {
+	public static void drawSphere(BlockPos startPos, float radius, float[] color, World world) {
 		MinecraftClient client = MinecraftClient.getInstance();
 
 		// Center coordinates of the sphere
@@ -53,7 +65,29 @@ public class ShapeDrawer {
 				double y = centerY + radius * Math.sin(phi) * Math.sin(theta);
 				double z = centerZ + radius * Math.cos(phi);
 
-				client.world.addParticle(ParticleTypes.FLAME, x, y, z, 0.0, 0.0, 0.0);
+				client.world.addParticle(ParticleTypes.SONIC_BOOM, x, y, z, 0, 0, 0);
+			}
+		}
+	}
+
+	public static void drawSphereLine(BlockPos startPos, float radius, float[] color, World world) {
+		MinecraftClient client = MinecraftClient.getInstance();
+		// Center coordinates of the sphere
+		double centerX = startPos.getX();
+		double centerY = startPos.getY();
+		double centerZ = startPos.getZ();
+
+
+		// Density of particles (number of particles per unit distance)
+		double density = 0.1; // Adjust this value to control the density
+
+		for (double phi = 0; phi <= Math.PI; phi += 1.0 / radius) {
+			for (double theta = 0; theta <= 2 * Math.PI; theta += 1.0 / radius) {
+				double x = centerX + radius * Math.sin(phi) * Math.cos(theta);
+				double y = centerY + radius * Math.sin(phi) * Math.sin(theta);
+				double z = centerZ + radius * Math.cos(phi);
+
+				world.setBlockState(new BlockPos((int) x, (int) y, (int) z), Blocks.STONE.getDefaultState());
 			}
 		}
 	}
