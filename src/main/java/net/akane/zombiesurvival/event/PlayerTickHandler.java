@@ -2,6 +2,7 @@ package net.akane.zombiesurvival.event;
 
 import com.mojang.authlib.GameProfile;
 import net.akane.zombiesurvival.Powers.GoThroughWalls.Ghost;
+import net.akane.zombiesurvival.Powers.Gojo.Gojo;
 import net.akane.zombiesurvival.ZombieSurvival;
 import net.akane.akanedata.DataArray;
 import net.akane.akanemaths.SecToTick;
@@ -50,6 +51,9 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
 						if (inventory.armor.get(2) != elytra) {
 							inventory.armor.set(2, elytra);
 						}
+					}
+					if (tag.equalsIgnoreCase("NahIdWin")) {
+						Gojo.enableFlight(player);
 					}
 				}
             }
