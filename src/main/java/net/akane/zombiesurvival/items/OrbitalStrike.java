@@ -58,7 +58,7 @@ public class OrbitalStrike extends Item {
 			interger--;
 			for (int i2 = 0; i2 < 1; i2++) {
 				drawCylinder(new BlockPos((int) hit.getPos().x, (int) 319, (int) hit.getPos().z), 5, 320);
-				TntEntity Airstrike_tnt = new TntEntity(world, hit.getPos().x, interger, hit.getPos().z, new PlayerEntity(world, new BlockPos((int) hit.getPos().x, (int) hit.getPos().y, (int) hit.getPos().z), 0, new GameProfile(UUID.randomUUID(), "AIRSTRIKE FROM THE DEATH STAR")) {
+				PlayerEntity totalyaplayer = new PlayerEntity(world, new BlockPos((int) hit.getPos().x, (int) hit.getPos().y, (int) hit.getPos().z), 0, new GameProfile(UUID.randomUUID(), "Orbital Cannon")) {
 					@Override
 					public boolean isSpectator() {
 						return false;
@@ -66,24 +66,26 @@ public class OrbitalStrike extends Item {
 
 					@Override
 					public boolean isCreative() {
-						return true;
+						return false;
 					}
-				});
+				};
+				TntEntity Airstrike_tnt = new TntEntity(world, hit.getPos().x, interger, hit.getPos().z, totalyaplayer);
 				Airstrike_tnt.setNoGravity(true);
 				Airstrike_tnt.setFuse(0);
 				// DO SOMETHING HERE
-				world.spawnEntity(Airstrike_tnt);
+//				world.spawnEntity(Airstrike_tnt);
+				world.createExplosion(totalyaplayer, hit.getPos().x, interger, hit.getPos().z, 20, World.ExplosionSourceType.MOB);
 			}
 		}
 		if (hit.getType() == HitResult.Type.BLOCK) {
 			BlockPos hitPos = ((BlockHitResult) hit).getBlockPos();
 			// Get all entities within a radius of the hit position
-			List<Entity> entities = world.getOtherEntities(user, new Box(hitPos).expand(10.0), entity -> true);
+			List<Entity> entities = world.getOtherEntities(user, new Box(hitPos).expand(100.0), entity -> true);
 			for (Entity entity : entities) {
 				// Do something with each entity, such as applying damage or effects
 				if (entity instanceof LivingEntity) {
 					// For example, apply damage to living entities within the radius
-					entity.kill();
+					entity.teleport(hit.getPos().x, hit.getPos().y, hit.getPos().z);
 				}
 			}
 		}

@@ -1,0 +1,2 @@
+rule ./libs/rhino-1.7.15.jar -> org/mozilla/rhino-1.7.15.jar
+rule ./libs/rhino-engine-1.7.15.jar -> org/mozilla/rhino-engine-1.7.15.jar

@@ -4,9 +4,9 @@ minecraft = "1.20.1"
 loom = "1.5.7"
 
 quilt_mappings = "1.20.1+build.23"
-quilt_loader = "0.24.0"
+quilt_loader = "0.26.0-beta.3"
 
-quilted_fabric_api = "7.4.0+0.90.0-1.20.1"
+quilted_fabric_api = "7.5.0+0.91.0-1.20.1"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -15,10 +15,13 @@ quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loade
 
 quilted_fabric_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilted_fabric_api" }
 quilted_fabric_api_deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilted_fabric_api" }
-
+# Rhino Run
+rhino_Run = { module = "org.mozilla:rhino", version = "1.7.15" }
+rhino_engine = { module = "org.mozilla:rhino-engine", version = "1.7.15" }
 # If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
 [bundles]
 quilted_fabric_api = ["quilted_fabric_api", "quilted_fabric_api_deprecated"]
+rhino = ["rhino_Run", "rhino_engine"] # Create a new bundle for Rhino dependencies
 
 [plugins]
 quilt_loom = { id = "org.quiltmc.loom", version.ref = "loom" }

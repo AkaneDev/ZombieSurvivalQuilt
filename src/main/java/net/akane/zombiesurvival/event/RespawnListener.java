@@ -12,6 +12,7 @@ public class RespawnListener implements ServerPlayerEvents.AfterRespawn{
     public void afterRespawn(ServerPlayerEntity serverPlayerEntity, ServerPlayerEntity serverPlayerEntity1, boolean b) {
         if (serverPlayerEntity != null) {
             DataArray playerData = PlayerHealthHandler.readPlayerHealthData(serverPlayerEntity);
+//			DataArray playerData = PlayerHealthHandler.readNullPlayer();
             assert playerData != null;
             ZombieSurvival.LOGGER.info(playerData.getName() + ", " + playerData.getPlayerUUID().toString() + ", " + playerData.getAmount());
             double healthamount = playerData.getAmount();

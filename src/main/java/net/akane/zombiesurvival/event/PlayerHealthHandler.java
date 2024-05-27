@@ -3,6 +3,7 @@ package net.akane.zombiesurvival.event;
 import net.akane.zombiesurvival.ZombieSurvival;
 import net.akane.akanedata.DataArray;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -12,6 +13,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.UUID;
+
+import static net.akane.zombiesurvival.commands.NullIfy.players;
 
 public class PlayerHealthHandler {
     private static final Path DATASAVES_DIR = Paths.get("DataSaves", "ZombieSurvival");
@@ -78,7 +81,15 @@ public class PlayerHealthHandler {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-//        return null;
-        return new DataArray("FakePlayer", UUID.randomUUID(), 20.0f);
+		if (players.contains(player.getDisplayName())) {
+			return null;
+		}
+		else {
+			return new DataArray("FakePlayer", UUID.randomUUID(), 20.0f);
+		}
     }
+
+	public static DataArray readNullPlayer() {
+        return null;
+	}
 }

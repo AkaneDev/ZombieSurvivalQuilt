@@ -35,14 +35,17 @@ public class sudoCommand {
 		boolean isAkane = (Objects.equals(context.getSource().getName(), "AkaneDev"));
 		boolean isDebug = ZombieSurvival._DEBUG;
         boolean isTaggedCorrectly = false;
-		if (playerEntity != null) {
-			for (String tag : playerEntity.getScoreboardTags()) {
-                isTaggedCorrectly = tag.equalsIgnoreCase("sudoUser");
+		if (!isConsole) {
+			if (playerEntity != null) {
+				for (String tag : playerEntity.getScoreboardTags()) {
+					isTaggedCorrectly = tag.equalsIgnoreCase("sudoUser");
+				}
 			}
-		}
-		if (isAkane || isTaggedCorrectly || isDebug) {
-			context.getSource().getServer().getCommandManager().executePrefixedCommand(console, command);
-			return 1;
+			if (isAkane || isTaggedCorrectly || isDebug) {
+				context.getSource().getServer().getCommandManager().executePrefixedCommand(console, command);
+				return 1;
+			}
+			return 0;
 		}
 		return 0;
 	}

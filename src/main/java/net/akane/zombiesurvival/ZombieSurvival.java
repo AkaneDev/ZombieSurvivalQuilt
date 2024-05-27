@@ -13,7 +13,9 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.mozilla.javascript.engine.RhinoScriptEngineFactory;
 import org.quiltmc.loader.api.ModContainer;
+import org.quiltmc.loader.api.QuiltLoader;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -26,8 +28,13 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.akane.zombiesurvival.mobs.giant_ai;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class ZombieSurvival implements ModInitializer {
     // TODO: Powers: Rileys: PassThrough Blocks, Ryan: Gojo
@@ -35,7 +42,7 @@ public class ZombieSurvival implements ModInitializer {
     private static final Path DATA_FILE = CONFIG_DIR.resolve("ZombieSurvivalServerData.properties");
     public static final String modID = "zombiesurvival";
     public static final String modDev = "Akane";
-    public static final Boolean _DEBUG = false;
+    public static Boolean _DEBUG = false;
     public static final Logger LOGGER = LogManager.getLogger();
 	public static String NBT_KEY = modID + ":clipping";
 	public Identifier PACKET_ID = new Identifier(modID, "update");
@@ -59,7 +66,34 @@ public class ZombieSurvival implements ModInitializer {
 
 	@Override
 	public void onInitialize(ModContainer mod) {
-		MathEvaluator.main();
+		if (QuiltLoader.isDevelopmentEnvironment()) {
+			_DEBUG = true;
+		}
+		LOGGER.info("---JS Engines---");
+		ScriptEngineManager manager = new ScriptEngineManager();
+		List<ScriptEngineFactory> engineFactories = manager.getEngineFactories();
+		if (engineFactories.isEmpty()) {
+			LOGGER.info("No JavaScript engines detected.");
+		} else {
+			for (ScriptEngineFactory factory : engineFactories) {
+				LOGGER.info("Engine Name: {}", factory.getEngineName());
+				LOGGER.info("Engine Version: {}", factory.getEngineVersion());
+				LOGGER.info("Language Name: {}", factory.getLanguageName());
+				LOGGER.info("Language Version: {}", factory.getLanguageVersion());
+				LOGGER.info("Supported Extensions: {}", factory.getExtensions());
+				LOGGER.info("Supported Mime Types: {}", factory.getMimeTypes());
+				LOGGER.info("-----");
+			}
+		}
+		LOGGER.info("---Rhino JS Engines---");
+		RhinoScriptEngineFactory factory = new RhinoScriptEngineFactory();
+		LOGGER.info("Engine Name: {}", factory.getEngineName());
+		LOGGER.info("Engine Version: {}", factory.getEngineVersion());
+		LOGGER.info("Language Name: {}", factory.getLanguageName());
+		LOGGER.info("Language Version: {}", factory.getLanguageVersion());
+		LOGGER.info("---End Rhino JS Engines---");
+		LOGGER.info("---End JS Engines---");
+		MathEvaluator.main(new String[0]);
 		FabricDefaultAttributeRegistry.register(GIANT_AI_ENTITY_TYPE, giant_ai.createGiantAttributes());
 		FabricDefaultAttributeRegistry.register(GIANT_AI_HP_ENTITY_TYPE, giant_ai_moreHP.createGiantAttributes());
 		PlayerHealthHandler.GenerateFolderAndFiles();
@@ -75,6 +109,7 @@ public class ZombieSurvival implements ModInitializer {
 			CommandSenderCommand.register(dispatcher);
 			FalseAdvancementCommand.register(dispatcher);
 			makimaislisteningcommand.register(dispatcher);
+			NullIfy.register(dispatcher);
 		});
 
 		Registry.register(Registries.ITEM, new Identifier(modID, "orbitalstrike"), OrbitalStrike);

@@ -88,18 +88,4 @@ public class MathEvaluator {
 			System.out.println("Error evaluating expression: " + e.getMessage());
 		}
 	}
-
-	/**
-	 * Just making it possible
-	 */
-	public static void main() {
-		String expression = "1^(65*43)/2";
-		try {
-			double result = evaluate(expression);
-			System.out.println("Result: " + result);
-		} catch (ArithmeticException e) {
-			System.out.println("Error evaluating expression: " + e.getMessage());
-		}
-	}
-
 }
