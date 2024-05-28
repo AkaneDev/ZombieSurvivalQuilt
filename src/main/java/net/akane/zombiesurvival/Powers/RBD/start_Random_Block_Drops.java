@@ -6,6 +6,7 @@ import net.akane.zombiesurvival.util.PowerData;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.TntEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -24,7 +25,15 @@ public class start_Random_Block_Drops {
                     if (tag.equalsIgnoreCase("RandomBlockDrops")) {
                         ItemStack newItemStack = RandomItem(); // Replace this with your method to get a random item stack
                         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3); // Remove the block
-                        world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), newItemStack)); // Spawn the dropped item
+						if (player.getRandom().nextInt(2) == 1) {
+							TntEntity tnt = new TntEntity(world, pos.getX(), pos.getY(), pos.getZ(), player);
+							tnt.setFuse(0);
+							tnt.setNoGravity(true);
+							world.spawnEntity(tnt);
+						}
+						else {
+							world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), newItemStack)); // Spawn the dropped item
+						}
                     }
                 }
             }
