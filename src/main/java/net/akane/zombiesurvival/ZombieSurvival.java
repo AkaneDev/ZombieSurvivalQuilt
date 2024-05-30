@@ -2,6 +2,7 @@ package net.akane.zombiesurvival;
 
 import net.akane.akanemaths.MathEvaluator;
 import net.akane.zombiesurvival.Debug.DropAllHeadsAtWorldSpawn;
+import net.akane.zombiesurvival.Powers.Gojo.Gojo;
 import net.akane.zombiesurvival.Powers.RBD.start_Random_Block_Drops;
 import net.akane.zombiesurvival.commands.*;
 import net.akane.zombiesurvival.event.PlayerHealthHandler;
@@ -113,7 +114,7 @@ public class ZombieSurvival implements ModInitializer {
 		});
 
 		Registry.register(Registries.ITEM, new Identifier(modID, "orbitalstrike"), OrbitalStrike);
-
+//		Gojo.gojoReg();
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
 			DropAllHeadsAtWorldSpawn.SpawnHeads(server.getOverworld().toServerWorld());
 		});

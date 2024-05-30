@@ -74,7 +74,7 @@ public class OrbitalStrike extends Item {
 				Airstrike_tnt.setFuse(0);
 				// DO SOMETHING HERE
 //				world.spawnEntity(Airstrike_tnt);
-				world.createExplosion(totalyaplayer, hit.getPos().x, interger, hit.getPos().z, 20, World.ExplosionSourceType.MOB);
+				world.createExplosion(totalyaplayer, hit.getPos().x, interger, hit.getPos().z, 10, World.ExplosionSourceType.MOB);
 			}
 		}
 		if (hit.getType() == HitResult.Type.BLOCK) {

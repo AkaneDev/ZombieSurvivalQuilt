@@ -53,7 +53,12 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
 						}
 					}
 					if (tag.equalsIgnoreCase("NahIdWin")) {
-						Gojo.enableFlight(player);
+						if (player.fallDistance > 3.0f) {
+							Gojo.enableFlight(player);
+						}
+						else {
+							Gojo.disableFlight(player);
+						}
 					}
 				}
             }
