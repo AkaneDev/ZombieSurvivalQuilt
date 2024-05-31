@@ -32,15 +32,13 @@ public class DropAllHeadsAtWorldSpawn {
 
     private static ItemStack[] getAllHeads(World world) {
         ItemStack[] itemStacks = new ItemStack[Registries.ITEM.size()];
-        if (ZombieSurvival._DEBUG) {
+		ZombieSurvival.DEBUG_LOGGER.info("You wouldn't believe it but if you have this mod and i didn't give it to you then, its stolen");
+        if (ZombieSurvival._DEBUG && world.getRegistryKey().getValue().toString().equalsIgnoreCase("betaworld")) {
             int index = 0;
             for (Identifier itemId : Registries.ITEM.getIds()) {
                 String name = new ItemStack(Registries.ITEM.get(itemId)).getName().getString();
                 ItemStack item = new ItemStack(Registries.ITEM.get(itemId));
                 world.spawnEntity(new ItemEntity(world, world.getSpawnPos().getX(), world.getSpawnPos().getY(), world.getSpawnPos().getZ(), item));
-                if (name.toLowerCase().contains("Skull".toLowerCase()) || name.toLowerCase().contains("Head".toLowerCase())) {
-                    ZombieSurvival.LOGGER.info(new ItemStack(Registries.ITEM.get(itemId)).getName().getString());
-                }
             }
         }
         return itemStacks;

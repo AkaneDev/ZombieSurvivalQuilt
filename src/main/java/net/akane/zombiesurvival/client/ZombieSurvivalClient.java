@@ -3,6 +3,7 @@ package net.akane.zombiesurvival.client;
 import com.mojang.blaze3d.platform.InputUtil;
 //import io.github.apace100.apoli.ApoliClient;
 import net.akane.zombiesurvival.Powers.GoThroughWalls.Ghost;
+import net.akane.zombiesurvival.Powers.Gojo.Gojo;
 import net.akane.zombiesurvival.ZombieSurvival;
 import net.akane.zombiesurvival.client.commands.ScoreBoardClientCommand;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -55,6 +56,6 @@ public class ZombieSurvivalClient implements ClientModInitializer {
 			dispatcher.register(ClientCommandManager.literal("taglistClient").executes(ScoreBoardClientCommand::execute)
 			);
 		});
-
+		Gojo.GojoClient();
     }
 }

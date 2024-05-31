@@ -44,7 +44,8 @@ public class ZombieSurvival implements ModInitializer {
     public static final String modID = "zombiesurvival";
     public static final String modDev = "Akane";
     public static Boolean _DEBUG = false;
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger(modID);
+	public static final Logger DEBUG_LOGGER = LogManager.getLogger("AkaneDev");
 	public static String NBT_KEY = modID + ":clipping";
 	public Identifier PACKET_ID = new Identifier(modID, "update");
     public static final EntityType<giant_ai> GIANT_AI_ENTITY_TYPE = Registry.register(
@@ -114,7 +115,7 @@ public class ZombieSurvival implements ModInitializer {
 		});
 
 		Registry.register(Registries.ITEM, new Identifier(modID, "orbitalstrike"), OrbitalStrike);
-//		Gojo.gojoReg();
+		Gojo.GojoReg();
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
 			DropAllHeadsAtWorldSpawn.SpawnHeads(server.getOverworld().toServerWorld());
 		});
