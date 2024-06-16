@@ -6,13 +6,8 @@ import net.akane.zombiesurvival.util.CylinderDrawer;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.TntEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.mob.GuardianEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
@@ -20,9 +15,10 @@ import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Holder;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Arm;
 import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -32,6 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 
 import java.util.List;
 import java.util.Objects;
@@ -58,23 +55,34 @@ public class OrbitalStrike extends Item {
 			interger--;
 			for (int i2 = 0; i2 < 1; i2++) {
 				drawCylinder(new BlockPos((int) hit.getPos().x, (int) 319, (int) hit.getPos().z), 5, 320);
-				PlayerEntity totalyaplayer = new PlayerEntity(world, new BlockPos((int) hit.getPos().x, (int) hit.getPos().y, (int) hit.getPos().z), 0, new GameProfile(UUID.randomUUID(), "Orbital Cannon")) {
+				LivingEntity totalyaplayer = new LivingEntity(EntityType.PLAYER, world) {
 					@Override
-					public boolean isSpectator() {
-						return false;
+					public Iterable<ItemStack> getArmorItems() {
+						return null;
 					}
 
 					@Override
-					public boolean isCreative() {
-						return false;
+					public ItemStack getEquippedStack(EquipmentSlot slot) {
+						return null;
+					}
+
+					@Override
+					public void equipStack(EquipmentSlot slot, ItemStack stack) {
+
+					}
+
+					@Override
+					public Arm getMainArm() {
+						return null;
 					}
 				};
+				totalyaplayer.setCustomName(Text.literal("AIRSTRIKE"));
 				TntEntity Airstrike_tnt = new TntEntity(world, hit.getPos().x, interger, hit.getPos().z, totalyaplayer);
 				Airstrike_tnt.setNoGravity(true);
 				Airstrike_tnt.setFuse(0);
 				// DO SOMETHING HERE
 //				world.spawnEntity(Airstrike_tnt);
-				world.createExplosion(totalyaplayer, hit.getPos().x, interger, hit.getPos().z, 10, World.ExplosionSourceType.MOB);
+				world.createExplosion(totalyaplayer, hit.getPos().x, interger, hit.getPos().z, 10, Explosion.DestructionType.DESTROY);
 			}
 		}
 		if (hit.getType() == HitResult.Type.BLOCK) {

@@ -32,7 +32,7 @@ public class FalseAdvancementCommand {
         String message = player + " has completed the challenge §5[" + advancement + "]";
 
         // Send the message to the command sender
-        context.getSource().sendFeedback(() -> Text.literal(message), false);
+        context.getSource().sendFeedback(Text.literal(message), false);
 
         // Return success
         return 1;

@@ -2,6 +2,7 @@ package net.akane.zombiesurvival.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.client.network.ClientCommandSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -18,7 +19,7 @@ public class ScoreBoardTagListCommand {
 		);
 	}
 
-	private static int executeServer(CommandContext<ServerCommandSource> context) {
+	private static int executeServer(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
 		PlayerEntity player = context.getSource().getPlayer();
 		for (String s : player.getScoreboardTags()) {
 			player.sendMessage(Text.literal(s), false);

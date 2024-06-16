@@ -14,12 +14,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtString;
-import net.minecraft.registry.Registries;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 public class GiveSkullCommand {
     public static ItemStack createSkull(Entity entity) {
-        ItemStack skull = new ItemStack(Registries.ITEM.get(new Identifier("minecraft", "player_head")));
+        ItemStack skull = new ItemStack(Registry.ITEM.get(new Identifier("minecraft", "player_head")));
 
         NbtCompound tag = skull.getOrCreateNbt();
         NbtCompound skullOwner = new NbtCompound();
@@ -61,7 +61,7 @@ public class GiveSkullCommand {
                 return 0;
             }
         }
-        context.getSource().sendFeedback((Supplier<Text>) Text.literal("Given skull to entities."), true);
+        context.getSource().sendFeedback(Text.literal("Given skull to entities."), true);
         return targets.size();
     }
 

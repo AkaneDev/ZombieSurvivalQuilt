@@ -3,6 +3,7 @@ package net.akane.zombiesurvival.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.akane.zombiesurvival.ZombieSurvival;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -25,7 +26,7 @@ public class sudoCommand {
 		);
 	}
 
-	private static int execute(CommandContext<ServerCommandSource> context) {
+	private static int execute(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
 		ServerCommandSource source = context.getSource();
 		ServerCommandSource console = source.withLevel(4);
 		String command = StringArgumentType.getString(context, "command");

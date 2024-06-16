@@ -9,9 +9,8 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.quiltmc.loader.api.minecraft.ClientOnly;
 
@@ -25,7 +24,6 @@ public class Gojo {
 
 	public static void GojoReg(){
 		ZombieSurvival.DEBUG_LOGGER.info("THIS IS PAIN WHY NO WORK");
-		registerattacksprojectiles();
 	}
 
 	public static void enableFlight(PlayerEntity player) {
@@ -36,37 +34,6 @@ public class Gojo {
 	public static void disableFlight(PlayerEntity player) {
 		player.getAbilities().allowFlying = false;
 		player.sendAbilitiesUpdate();
-	}
-
-	public static void registerattacksprojectiles() {
-		Registry.register(Registries.ENTITY_TYPE, new Identifier(modID, "reversal_red"), REVERSEALRED);
-		Registry.register(Registries.ENTITY_TYPE, new Identifier(modID, "amplification_blue"), AMPLFCATIONBLUE);
-		Registry.register(Registries.ENTITY_TYPE, new Identifier(modID, "hollow_purple"), HOLLOWPURPLE);
-	}
-
-	@ClientOnly
-	public static void GojoClient() {
-		EntityRendererRegistry.register(Gojo.AMPLFCATIONBLUE, (context) ->
-			new EntityRenderer<ampflicationblue>(context) {
-				@Override
-				public Identifier getTexture(ampflicationblue entity) {
-					return new Identifier(modID, "textures/entity/amplification_blue.png");
-				}
-			});
-		EntityRendererRegistry.register(Gojo.REVERSEALRED, (context) ->
-			new EntityRenderer<reversalred>(context) {
-				@Override
-				public Identifier getTexture(reversalred entity) {
-					return new Identifier(modID, "textures/entity/reversal_red.png");
-				}
-			});
-		EntityRendererRegistry.register(Gojo.HOLLOWPURPLE, (context) ->
-			new EntityRenderer<hollowpurple>(context) {
-				@Override
-				public Identifier getTexture(hollowpurple entity) {
-					return new Identifier(modID, "textures/entity/hollow_purple.png");
-				}
-			});
 	}
 
 }

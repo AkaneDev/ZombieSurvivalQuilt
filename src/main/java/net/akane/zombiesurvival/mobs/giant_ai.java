@@ -63,10 +63,10 @@ public class giant_ai extends GiantEntity {
 
     public static DefaultAttributeContainer.Builder createGiantAttributes() {
         double health = 150.0;
-        return HostileEntity.createAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, health).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.005).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 350.0);
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, health).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.005).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 350.0);
     }
 
 	public float getPathfindingFavor(BlockPos pos, WorldView world) {
-		return world.getPathfindingCostFromLight(pos);
+		return world.method_42309(pos);
 	}
 }

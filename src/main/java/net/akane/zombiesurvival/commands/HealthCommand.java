@@ -52,7 +52,7 @@ public class HealthCommand {
                     PlayerHealthHandler.savePlayerHealthData(amount, player.getUuid(), player);
                 }
             }
-            context.getSource().sendFeedback(() -> Text.literal(String.format("Added %s Health to %s", amount, entity.getDisplayName().getString())), true);
+            context.getSource().sendFeedback(Text.literal(String.format("Added %s Health to %s", amount, entity.getDisplayName().getString())), true);
         }
         return targets.size();
     }

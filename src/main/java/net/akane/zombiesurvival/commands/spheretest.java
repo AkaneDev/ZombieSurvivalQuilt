@@ -29,7 +29,7 @@ public class spheretest {
 		if (radius != null) {
 			float[] color = {1.0f, 0.0f, 0.0f, 1.0f}; // Red color
 			ShapeDrawer.drawSphereLine(Objects.requireNonNull(source.getEntity()).getBlockPos(), radius, color, context.getSource().getWorld());
-			source.sendFeedback(() -> Text.literal(String.format("Done")), true);
+			source.sendFeedback(Text.literal(String.format("Done")), true);
 			return 1;
 		}
 		return 0;

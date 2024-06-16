@@ -2,11 +2,9 @@ package net.akane.zombiesurvival.mobs;
 
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.TntEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
@@ -17,6 +15,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
+import net.minecraft.text.Text;
+import net.minecraft.util.Arm;
 import net.minecraft.world.World;
 
 import java.util.Collection;
@@ -26,17 +26,33 @@ import java.util.UUID;
 
 public class ExplosiveArrowEntity extends ArrowEntity {
 
-	private final TntEntity Airstrike_tnt = new TntEntity(this.getWorld(), this.getX(), this.getY(), this.getZ(), new PlayerEntity(this.getWorld(), this.getBlockPos(), 0, new GameProfile(UUID.randomUUID(), "AIRSTRIKE FROM THE DEATH STAR")) {
+	private LivingEntity arm = new LivingEntity(EntityType.PLAYER, world) {
 		@Override
-		public boolean isSpectator() {
-			return false;
+		public Iterable<ItemStack> getArmorItems() {
+			return null;
 		}
 
 		@Override
-		public boolean isCreative() {
-			return true;
+		public ItemStack getEquippedStack(EquipmentSlot slot) {
+			return null;
 		}
-	});
+
+		@Override
+		public void equipStack(EquipmentSlot slot, ItemStack stack) {
+
+		}
+
+		@Override
+		public Arm getMainArm() {
+			return null;
+		}
+	};
+
+	{
+		arm.setCustomName(Text.literal("AIRSTRIKE FROM THE DEATH STAR"));
+	}
+
+	private final TntEntity Airstrike_tnt = new TntEntity(this.getWorld(), this.getX(), this.getY(), this.getZ(), arm);
 
 	private static final int EXPOSED_POTION_DECAY_DURATION = 600;
 	private static final int DEFAULT_COLOR = -1;

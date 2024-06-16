@@ -9,7 +9,7 @@ import net.minecraft.command.argument.ItemStackArgument;
 import net.minecraft.command.argument.ItemStackArgumentType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
+import net.minecraft.util.registry.Registry;
 //import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.command.GiveCommand;
 import net.minecraft.server.command.ServerCommandSource;
@@ -31,7 +31,7 @@ public class DebugGive {
     private static int executer(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = context.getSource().getPlayer();
         Identifier itemID = new Identifier(StringArgumentType.getString(context, "power"));
-        Item item = Registries.ITEM.get(itemID);
+        Item item = Registry.ITEM.get(itemID);
         ItemStack itemStack;
         // Check if the item exists
         if (item != null) {

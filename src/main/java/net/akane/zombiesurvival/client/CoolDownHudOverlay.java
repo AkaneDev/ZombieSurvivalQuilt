@@ -4,12 +4,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class CoolDownHudOverlay implements HudRenderCallback {
 	@Override
-	public void onHudRender(GuiGraphics drawContext, float tickDelta) {
+	public void onHudRender(MatrixStack matrixStack, float tickDelta) {
 		int x = 0;
 		int y = 0;
 		MinecraftClient client = MinecraftClient.getInstance();
@@ -19,7 +19,6 @@ public class CoolDownHudOverlay implements HudRenderCallback {
 
 			x = width / 2;
 			y = height;
-			drawContext.drawText(client.textRenderer, "Test", x, y, 0, true);
 		}
 	}
 }

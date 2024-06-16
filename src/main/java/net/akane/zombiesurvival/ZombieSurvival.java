@@ -25,8 +25,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.util.registry.Registry;
 import net.akane.zombiesurvival.mobs.giant_ai;
 
 import javax.script.ScriptEngine;
@@ -49,7 +48,7 @@ public class ZombieSurvival implements ModInitializer {
 	public static String NBT_KEY = modID + ":clipping";
 	public Identifier PACKET_ID = new Identifier(modID, "update");
     public static final EntityType<giant_ai> GIANT_AI_ENTITY_TYPE = Registry.register(
-            Registries.ENTITY_TYPE,
+		Registry.ENTITY_TYPE,
             modID + ":giant_ai",
             EntityType.Builder.create(giant_ai::new, SpawnGroup.MONSTER).build(modID + ":giant_ai")
     );
@@ -61,7 +60,7 @@ public class ZombieSurvival implements ModInitializer {
 	public static final Item OrbitalStrike = new OrbitalStrike(new Item.Settings());
 
 	public static final EntityType<giant_ai_moreHP> GIANT_AI_HP_ENTITY_TYPE = Registry.register(
-		Registries.ENTITY_TYPE,
+		Registry.ENTITY_TYPE,
 		modID + ":giant_hp_ai",
 		EntityType.Builder.create(giant_ai_moreHP::new, SpawnGroup.MONSTER).build(modID + ":giant_hp_ai")
 	);
@@ -114,7 +113,7 @@ public class ZombieSurvival implements ModInitializer {
 			NullIfy.register(dispatcher);
 		});
 
-		Registry.register(Registries.ITEM, new Identifier(modID, "orbitalstrike"), OrbitalStrike);
+		Registry.register(Registry.ITEM, new Identifier(modID, "orbitalstrike"), OrbitalStrike);
 		Gojo.GojoReg();
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
 			DropAllHeadsAtWorldSpawn.SpawnHeads(server.getOverworld().toServerWorld());

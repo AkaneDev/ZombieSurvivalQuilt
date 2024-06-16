@@ -23,7 +23,7 @@ public class CommandSenderCommand {
 
     private static int execute(CommandContext<ServerCommandSource> context) {
         ServerCommandSource source = context.getSource();
-        context.getSource().sendFeedback(() -> Text.literal("Command Sender Is: " + source.getName()), true);
+        context.getSource().sendFeedback(Text.literal("Command Sender Is: " + source.getName()), true);
         return 1;
     }
 }

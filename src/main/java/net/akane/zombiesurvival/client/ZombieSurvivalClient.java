@@ -39,7 +39,7 @@ public class ZombieSurvivalClient implements ClientModInitializer {
 			ClientPlayerEntity player = client.player;
 			if (player != null) {
 				if (useDashKeybind.wasPressed() && ((dashCooldown < 0) || player.getScoreboardTags().contains("OP"))) {
-					player.addVelocity(player.getRotationVecClient().multiply(2));
+					player.addVelocity(player.getRotationVecClient().multiply(2).x, player.getRotationVecClient().multiply(2).y, player.getRotationVecClient().multiply(2).z);
 					dashCooldown = dashCooldownSeconds.GetTicks();
 				}
 				if (usePrimaryActivePowerKeybind.wasPressed()) {
@@ -56,6 +56,5 @@ public class ZombieSurvivalClient implements ClientModInitializer {
 			dispatcher.register(ClientCommandManager.literal("taglistClient").executes(ScoreBoardClientCommand::execute)
 			);
 		});
-		Gojo.GojoClient();
     }
 }
