@@ -1,6 +1,6 @@
-package net.akane.zombiesurvival.event;
+package akanedev.org.zombiesurvival.event;
 
-import net.akane.zombiesurvival.ZombieSurvival;
+import akanedev.org.zombiesurvival.ZombieSurvival;
 import net.akane.akanedata.DataArray;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.entity.attribute.EntityAttributeInstance;

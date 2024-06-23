@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.impl;
+package akanedev.org.zombiesurvival.impl;
 
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;

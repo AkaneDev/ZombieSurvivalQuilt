@@ -1,7 +1,8 @@
-package net.akane.zombiesurvival.util;
+package akanedev.org.zombiesurvival.util;
 
 import net.akane.akanemaths.SecToTick;
 import net.minecraft.nbt.NbtCompound;
+import akanedev.org.zombiesurvival.util.*;
 
 import java.util.Objects;
 

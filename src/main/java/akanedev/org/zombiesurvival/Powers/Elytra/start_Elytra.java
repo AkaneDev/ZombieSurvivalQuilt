@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.Powers.Elytra;
+package akanedev.org.zombiesurvival.Powers.Elytra;
 
 public class start_Elytra {
 }

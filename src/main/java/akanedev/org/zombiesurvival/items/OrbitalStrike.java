@@ -1,8 +1,6 @@
-package net.akane.zombiesurvival.items;
+package akanedev.org.zombiesurvival.items;
 
 import com.mojang.authlib.GameProfile;
-import net.akane.zombiesurvival.mobs.ExplosiveArrowEntity;
-import net.akane.zombiesurvival.util.CylinderDrawer;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.Particle;
@@ -34,8 +32,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import static net.akane.zombiesurvival.util.CylinderDrawer.drawCylinder;
-
 public class OrbitalStrike extends Item {
 	public OrbitalStrike(Settings settings) {
 		super(settings);
@@ -54,35 +50,32 @@ public class OrbitalStrike extends Item {
 		for (int i = 319+64; i >= 0; i--) {
 			interger--;
 			for (int i2 = 0; i2 < 1; i2++) {
-				drawCylinder(new BlockPos((int) hit.getPos().x, (int) 319, (int) hit.getPos().z), 5, 320);
-				LivingEntity totalyaplayer = new LivingEntity(EntityType.PLAYER, world) {
+				TntEntity Airstrike_tnt = new TntEntity(world, hit.getPos().x, interger, hit.getPos().z, new PlayerEntity(world, new BlockPos((int) hit.getPos().x, (int) hit.getPos().y, (int) hit.getPos().z), 0, new GameProfile(UUID.randomUUID(), "Airstrike")) {
 					@Override
-					public Iterable<ItemStack> getArmorItems() {
-						return null;
+					public boolean isSpectator() {
+						return false;
 					}
 
 					@Override
-					public ItemStack getEquippedStack(EquipmentSlot slot) {
-						return null;
+					public boolean isCreative() {
+						return false;
 					}
-
-					@Override
-					public void equipStack(EquipmentSlot slot, ItemStack stack) {
-
-					}
-
-					@Override
-					public Arm getMainArm() {
-						return null;
-					}
-				};
-				totalyaplayer.setCustomName(Text.literal("AIRSTRIKE"));
-				TntEntity Airstrike_tnt = new TntEntity(world, hit.getPos().x, interger, hit.getPos().z, totalyaplayer);
+				});
 				Airstrike_tnt.setNoGravity(true);
 				Airstrike_tnt.setFuse(0);
 				// DO SOMETHING HERE
 //				world.spawnEntity(Airstrike_tnt);
-				world.createExplosion(totalyaplayer, hit.getPos().x, interger, hit.getPos().z, 10, Explosion.DestructionType.DESTROY);
+				world.createExplosion(new PlayerEntity(world, new BlockPos((int) hit.getPos().x, (int) hit.getPos().y, (int) hit.getPos().z), 0, new GameProfile(UUID.randomUUID(), "Airstrike")) {
+					@Override
+					public boolean isSpectator() {
+						return false;
+					}
+
+					@Override
+					public boolean isCreative() {
+						return false;
+					}
+				}, hit.getPos().x, interger, hit.getPos().z, 10, World.ExplosionSourceType.MOB);
 			}
 		}
 		if (hit.getType() == HitResult.Type.BLOCK) {

@@ -1,6 +1,6 @@
-package net.akane.zombiesurvival.event;
+package akanedev.org.zombiesurvival.event;
 
-import net.akane.zombiesurvival.ZombieSurvival;
+import akanedev.org.zombiesurvival.ZombieSurvival;
 import net.akane.akanedata.DataArray;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.UUID;
 
-import static net.akane.zombiesurvival.commands.NullIfy.players;
+import static akanedev.org.zombiesurvival.commands.NullIfy.players;
 
 public class PlayerHealthHandler {
     private static final Path DATASAVES_DIR = Paths.get("DataSaves", "ZombieSurvival");

@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.mobs;
+package akanedev.org.zombiesurvival.mobs;
 
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
@@ -26,7 +26,7 @@ import java.util.UUID;
 
 public class ExplosiveArrowEntity extends ArrowEntity {
 
-	private LivingEntity arm = new LivingEntity(EntityType.PLAYER, world) {
+	private LivingEntity arm = new LivingEntity(EntityType.PLAYER, getWorld()) {
 		@Override
 		public Iterable<ItemStack> getArmorItems() {
 			return null;

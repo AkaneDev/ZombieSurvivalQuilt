@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival;
+package akanedev.org.zombiesurvival;
 
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;

@@ -1,10 +1,10 @@
-package net.akane.zombiesurvival.commands;
+package akanedev.org.zombiesurvival.commands;
 
+import akanedev.org.zombiesurvival.ZombieSurvival;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.akane.zombiesurvival.ZombieSurvival;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;

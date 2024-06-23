@@ -1,10 +1,11 @@
-package net.akane.zombiesurvival.Debug;
+package akanedev.org.zombiesurvival.Debug;
 
-import net.akane.zombiesurvival.ZombieSurvival;
+import akanedev.org.zombiesurvival.ZombieSurvival;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -17,10 +18,10 @@ public class DropAllHeadsAtWorldSpawn {
     }
 
     public static ItemStack[] getAllItems() {
-        ItemStack[] itemStacks = new ItemStack[Registry.ITEM.size()];
+        ItemStack[] itemStacks = new ItemStack[Registries.ITEM.size()];
         int index = 0;
-        for (Identifier itemId : Registry.ITEM.getIds()) {
-			ItemStack item = new ItemStack(Registry.ITEM.get(itemId));
+        for (Identifier itemId : Registries.ITEM.getIds()) {
+			ItemStack item = new ItemStack(Registries.ITEM.get(itemId));
 			ZombieSurvival.LOGGER.info(item.getName().getString());
 			if (!item.getName().getString().equalsIgnoreCase("Orbital Strike")) {
 				itemStacks[index] = item;
@@ -31,13 +32,13 @@ public class DropAllHeadsAtWorldSpawn {
     }
 
     private static ItemStack[] getAllHeads(World world) {
-        ItemStack[] itemStacks = new ItemStack[Registry.ITEM.size()];
+        ItemStack[] itemStacks = new ItemStack[Registries.ITEM.size()];
 		ZombieSurvival.DEBUG_LOGGER.info("You wouldn't believe it but if you have this mod and i didn't give it to you then, its stolen");
         if (ZombieSurvival._DEBUG && world.getRegistryKey().getValue().toString().equalsIgnoreCase("betaworld")) {
             int index = 0;
-            for (Identifier itemId : Registry.ITEM.getIds()) {
-                String name = new ItemStack(Registry.ITEM.get(itemId)).getName().getString();
-                ItemStack item = new ItemStack(Registry.ITEM.get(itemId));
+            for (Identifier itemId : Registries.ITEM.getIds()) {
+                String name = new ItemStack(Registries.ITEM.get(itemId)).getName().getString();
+                ItemStack item = new ItemStack(Registries.ITEM.get(itemId));
                 world.spawnEntity(new ItemEntity(world, world.getSpawnPos().getX(), world.getSpawnPos().getY(), world.getSpawnPos().getZ(), item));
             }
         }

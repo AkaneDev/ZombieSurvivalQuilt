@@ -1,8 +1,8 @@
-package net.akane.zombiesurvival.everyoneAllatonce;
+package akanedev.org.zombiesurvival.everyoneAllatonce;
 
 import net.akane.akaneloging.akanelogging;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import java.io.BufferedReader;

@@ -1,5 +1,6 @@
-package net.akane.zombiesurvival.commands;
+package akanedev.org.zombiesurvival.commands;
 
+import akanedev.org.zombiesurvival.event.PlayerHealthHandler;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -7,7 +8,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.akane.zombiesurvival.event.PlayerHealthHandler;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -52,7 +52,7 @@ public class HealthCommand {
                     PlayerHealthHandler.savePlayerHealthData(amount, player.getUuid(), player);
                 }
             }
-            context.getSource().sendFeedback(Text.literal(String.format("Added %s Health to %s", amount, entity.getDisplayName().getString())), true);
+            context.getSource().sendFeedback(() -> Text.literal(String.format("Added %s Health to %s", amount, entity.getDisplayName().getString())), true);
         }
         return targets.size();
     }

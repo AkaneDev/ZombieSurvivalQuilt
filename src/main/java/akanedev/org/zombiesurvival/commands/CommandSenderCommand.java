@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.commands;
+package akanedev.org.zombiesurvival.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
@@ -23,7 +23,7 @@ public class CommandSenderCommand {
 
     private static int execute(CommandContext<ServerCommandSource> context) {
         ServerCommandSource source = context.getSource();
-        context.getSource().sendFeedback(Text.literal("Command Sender Is: " + source.getName()), true);
+        context.getSource().sendFeedback(() -> Text.literal("Command Sender Is: " + source.getName()), true);
         return 1;
     }
 }

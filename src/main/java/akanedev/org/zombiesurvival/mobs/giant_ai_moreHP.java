@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.mobs;
+package akanedev.org.zombiesurvival.mobs;
 
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
@@ -56,10 +56,10 @@ public class giant_ai_moreHP extends GiantEntity {
 
     public static DefaultAttributeContainer.Builder createGiantAttributes() {
         double health = 3200000000.00;
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, health).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.05).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 25.0);
+        return HostileEntity.createAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, health).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.05).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 25.0);
     }
 
 	public float getPathfindingFavor(BlockPos pos, WorldView world) {
-		return world.method_42309(pos);
+		return world.getPathfindingCostFromLight(pos);
 	}
 }

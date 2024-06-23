@@ -1,6 +1,6 @@
-package net.akane.zombiesurvival.Powers.GoThroughWalls;
+package akanedev.org.zombiesurvival.Powers.GoThroughWalls;
 
-import net.akane.zombiesurvival.ZombieSurvival;
+import akanedev.org.zombiesurvival.ZombieSurvival;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.PlayerAbilities;

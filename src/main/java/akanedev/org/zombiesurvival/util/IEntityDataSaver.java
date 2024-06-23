@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.util;
+package akanedev.org.zombiesurvival.util;
 
 import net.minecraft.nbt.NbtCompound;
 import org.spongepowered.asm.mixin.Unique;

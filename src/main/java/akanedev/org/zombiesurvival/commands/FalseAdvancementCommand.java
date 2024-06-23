@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.commands;
+package akanedev.org.zombiesurvival.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -32,7 +32,7 @@ public class FalseAdvancementCommand {
         String message = player + " has completed the challenge §5[" + advancement + "]";
 
         // Send the message to the command sender
-        context.getSource().sendFeedback(Text.literal(message), false);
+        context.getSource().sendFeedback(() -> Text.literal(message), false);
 
         // Return success
         return 1;

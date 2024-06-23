@@ -1,14 +1,9 @@
-package net.akane.zombiesurvival.event;
+package akanedev.org.zombiesurvival.event;
 
+import akanedev.org.zombiesurvival.Powers.Gojo.Gojo;
 import com.mojang.authlib.GameProfile;
-import net.akane.zombiesurvival.Powers.GoThroughWalls.Ghost;
-import net.akane.zombiesurvival.Powers.Gojo.Gojo;
-import net.akane.zombiesurvival.ZombieSurvival;
 import net.akane.akanedata.DataArray;
 import net.akane.akanemaths.SecToTick;
-import net.akane.zombiesurvival.everyoneAllatonce.GetAllPlayerLocation;
-import net.akane.zombiesurvival.util.IEntityDataSaver;
-import net.akane.zombiesurvival.util.PowerData;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;

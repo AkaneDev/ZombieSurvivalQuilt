@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.client.commands;
+package akanedev.org.zombiesurvival.client.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;

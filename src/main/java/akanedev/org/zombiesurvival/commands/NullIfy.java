@@ -1,11 +1,9 @@
-package net.akane.zombiesurvival.commands;
+package akanedev.org.zombiesurvival.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.akane.akanedata.DataArray;
-import net.akane.zombiesurvival.ZombieSurvival;
-import net.akane.zombiesurvival.event.PlayerHealthHandler;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;

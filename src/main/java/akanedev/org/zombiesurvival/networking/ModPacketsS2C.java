@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.networking;
+package akanedev.org.zombiesurvival.networking;
 
 public class ModPacketsS2C {
 }

@@ -1,4 +1,4 @@
-package net.akane.zombiesurvival.util;
+package akanedev.org.zombiesurvival.util;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.particle.ParticleTypes;

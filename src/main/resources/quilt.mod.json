@@ -16,8 +16,9 @@
         },
         "intermediate_mappings": "net.fabricmc:intermediary",
         "entrypoints": {
-            "init": "akanedev.org.zombiesurvival.Zombiesurvival"
-        },
+            "init": "akanedev.org.zombiesurvival.ZombieSurvival",
+					  "client_init": "akanedev.org.zombiesurvival.client.ZombieSurvivalClient"
+				},
         "depends": [
             {
                 "id": "quilt_loader",

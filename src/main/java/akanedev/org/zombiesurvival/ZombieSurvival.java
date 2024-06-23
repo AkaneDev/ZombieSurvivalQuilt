@@ -1,15 +1,17 @@
 package akanedev.org.zombiesurvival;
 
+import akanedev.org.zombiesurvival.Debug.DropAllHeadsAtWorldSpawn;
+import akanedev.org.zombiesurvival.Powers.Akane.restless.goodluck;
+import akanedev.org.zombiesurvival.Powers.Gojo.Gojo;
+import akanedev.org.zombiesurvival.Powers.RBD.start_Random_Block_Drops;
+import akanedev.org.zombiesurvival.event.PlayerHealthHandler;
+import akanedev.org.zombiesurvival.event.PlayerTickHandler;
+import akanedev.org.zombiesurvival.event.RespawnListener;
+import akanedev.org.zombiesurvival.items.OrbitalStrike;
+import akanedev.org.zombiesurvival.mobs.giant_ai;
+import akanedev.org.zombiesurvival.mobs.giant_ai_moreHP;
 import net.akane.akanemaths.MathEvaluator;
-import net.akane.zombiesurvival.Debug.DropAllHeadsAtWorldSpawn;
-import net.akane.zombiesurvival.Powers.Gojo.Gojo;
-import net.akane.zombiesurvival.Powers.RBD.start_Random_Block_Drops;
 import akanedev.org.zombiesurvival.commands.*;
-import net.akane.zombiesurvival.event.PlayerHealthHandler;
-import net.akane.zombiesurvival.event.PlayerTickHandler;
-import net.akane.zombiesurvival.event.RespawnListener;
-import net.akane.zombiesurvival.items.OrbitalStrike;
-import net.akane.zombiesurvival.mobs.giant_ai_moreHP;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -27,8 +29,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registry;
-import net.akane.zombiesurvival.mobs.giant_ai;
-
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
@@ -100,18 +100,19 @@ public class ZombieSurvival implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(GIANT_AI_HP_ENTITY_TYPE, giant_ai_moreHP.createGiantAttributes());
 		PlayerHealthHandler.GenerateFolderAndFiles();
 		start_Random_Block_Drops.register();
+		goodluck.dontmindthisryanjustAkaneStuff();
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, dedicated1) -> {
-			net.akane.zombiesurvival.commands.spheretest.register(dispatcher);
-			net.akane.zombiesurvival.commands.calc.register(dispatcher);
-			net.akane.zombiesurvival.commands.GiveSkullCommand.register(dispatcher);
-			net.akane.zombiesurvival.commands.HealthCommand.register(dispatcher);
-			net.akane.zombiesurvival.commands.RenameCommand.register(dispatcher);
-			net.akane.zombiesurvival.commands.sudoCommand.register(dispatcher);
-			net.akane.zombiesurvival.commands.ScoreBoardTagListCommand.registerServer(dispatcher);
-			net.akane.zombiesurvival.commands.CommandSenderCommand.register(dispatcher);
-			net.akane.zombiesurvival.commands.FalseAdvancementCommand.register(dispatcher);
-			net.akane.zombiesurvival.commands.makimaislisteningcommand.register(dispatcher);
-			net.akane.zombiesurvival.commands.NullIfy.register(dispatcher);
+			spheretest.register(dispatcher);
+			calc.register(dispatcher);
+			GiveSkullCommand.register(dispatcher);
+			HealthCommand.register(dispatcher);
+			RenameCommand.register(dispatcher);
+			sudoCommand.register(dispatcher);
+			ScoreBoardTagListCommand.registerServer(dispatcher);
+			CommandSenderCommand.register(dispatcher);
+			FalseAdvancementCommand.register(dispatcher);
+			makimaislisteningcommand.register(dispatcher);
+			NullIfy.register(dispatcher);
 		});
 
 		Registry.register(Registries.ITEM, new Identifier(modID, "orbitalstrike"), OrbitalStrike);

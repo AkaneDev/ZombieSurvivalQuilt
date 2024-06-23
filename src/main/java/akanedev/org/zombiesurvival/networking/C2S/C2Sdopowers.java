@@ -1,7 +1,7 @@
-package net.akane.zombiesurvival.networking.C2S;
+package akanedev.org.zombiesurvival.networking.C2S;
 
+import akanedev.org.zombiesurvival.ZombieSurvival;
 import io.netty.buffer.Unpooled;
-import net.akane.zombiesurvival.ZombieSurvival;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
 import net.minecraft.util.Identifier;

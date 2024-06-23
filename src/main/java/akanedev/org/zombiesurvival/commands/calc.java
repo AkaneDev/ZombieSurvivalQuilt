@@ -1,12 +1,11 @@
-package net.akane.zombiesurvival.commands;
+package akanedev.org.zombiesurvival.commands;
 
+import akanedev.org.zombiesurvival.ZombieSurvival;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import lombok.SneakyThrows;
-import net.akane.zombiesurvival.Debug.DropAllHeadsAtWorldSpawn;
-import net.akane.zombiesurvival.ZombieSurvival;
+//import lombok.SneakyThrows;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -56,7 +55,7 @@ public class calc {
 		String expression = StringArgumentType.getString(context, "evaluate");
 		if (expression != null) {
 			double result = evaluate(expression);
-			source.sendFeedback(Text.literal(String.format("Result %s", result)), true);
+			source.sendFeedback(() -> Text.literal(String.format("Result %s", result)), true);
 			return 1;
 		}
 		return 0;
@@ -68,7 +67,7 @@ public class calc {
 		String arg = StringArgumentType.getString(context, "arg");
 		if (expression != null) {
 			double result = evaluatecode(expression, arg, Objects.requireNonNull(source.getPlayer()), source.getWorld(), context, source);
-			source.sendFeedback(Text.literal(String.format("Result %s", result)), true);
+			source.sendFeedback(() -> Text.literal(String.format("Result %s", result)), true);
 			return 1;
 		}
 		return 0;
