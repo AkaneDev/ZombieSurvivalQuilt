@@ -1,6 +1,7 @@
 plugins {
 	id 'maven-publish'
 	alias libs.plugins.quilt.loom
+	id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 base {
@@ -16,6 +17,8 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	mavenCentral()
+	maven { url = "https://jitpack.io" }
 }
 
 loom {
@@ -50,6 +53,10 @@ dependencies {
 	// Quilted Fabric API will automatically pull in the correct QSL version.
 	modImplementation libs.quilted.fabric.api
 	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
+
+	// Dependencies
+	implementation libs.rhino.run
+	implementation libs.rhino.engine
 }
 
 processResources {
@@ -86,6 +93,26 @@ jar {
 		rename { "${it}_${base.archivesName.get()}" }
 	}
 }
+
+shadowJar {
+	configurations = [project.configurations.runtimeClasspath]
+	archiveClassifier.set('shadow')
+	// Specify dependencies to include in the shadow jar
+	dependencies {
+		include(dependency('org.mozilla:rhino:1.7.15'))
+		include(dependency('org.mozilla:rhino-engine:1.7.15'))
+//		include(dependency(files("libs/lodestone-0.0.2+1.19.5.jar")))
+	}
+}
+
+remapJar {
+	dependsOn shadowJar
+	inputFile.set(shadowJar.archiveFile)
+	archiveClassifier.set('')
+}
+
+build.dependsOn shadowJar
+shadowJar.finalizedBy remapJar
 
 // Configure the maven publication
 publishing {
