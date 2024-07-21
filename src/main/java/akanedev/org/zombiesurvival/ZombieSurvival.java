@@ -7,6 +7,7 @@ import akanedev.org.zombiesurvival.Powers.RBD.start_Random_Block_Drops;
 import akanedev.org.zombiesurvival.event.PlayerHealthHandler;
 import akanedev.org.zombiesurvival.event.PlayerTickHandler;
 import akanedev.org.zombiesurvival.event.RespawnListener;
+import akanedev.org.zombiesurvival.event.ServerLoadEvent;
 import akanedev.org.zombiesurvival.items.OrbitalStrike;
 import akanedev.org.zombiesurvival.mobs.giant_ai;
 import akanedev.org.zombiesurvival.mobs.giant_ai_moreHP;
@@ -119,10 +120,13 @@ public class ZombieSurvival implements ModInitializer {
 		Gojo.GojoReg();
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
 			DropAllHeadsAtWorldSpawn.SpawnHeads(server.getOverworld().toServerWorld());
+			new ServerLoadEvent();
 		});
 
 		ServerTickEvents.START_SERVER_TICK.register(new PlayerTickHandler());
 
 		ServerPlayerEvents.AFTER_RESPAWN.register(new RespawnListener());
+
+
 	}
 }

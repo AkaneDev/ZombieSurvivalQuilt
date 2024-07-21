@@ -1,12 +1,16 @@
 package akanedev.org.zombiesurvival.event;
 
+import akanedev.org.zombiesurvival.Powers.Akane.restless.immortal.toggleableImmortal;
 import akanedev.org.zombiesurvival.Powers.Gojo.Gojo;
+import akanedev.org.zombiesurvival.ZombieSurvival;
 import com.mojang.authlib.GameProfile;
 import net.akane.akanedata.DataArray;
 import net.akane.akanemaths.SecToTick;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -21,6 +25,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.Objects;
 import java.util.Set;
@@ -56,6 +61,7 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
 						else {
 							Gojo.enableFlight(player);
 						}
+						Gojo.checkAndApplyInfinity(player.getWorld(), player, 3.5);
 					}
 					if (tag.equalsIgnoreCase("debug")) {
 						PlayerAbilities abilities = player.getAbilities();
@@ -71,6 +77,18 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
 							ItemStack food = new ItemStack(Items.ENCHANTED_GOLDEN_APPLE).setCustomName(Text.of("Apple"));
 							food.setCount(128);
 							inventory.offHand.set(0, food);
+						}
+					}
+					if (tag.equalsIgnoreCase("Akanes") || tag.equalsIgnoreCase("debug")) {
+						for (String tag2 : player.getScoreboardTags()) {
+							if (tag2.equalsIgnoreCase("immortal")) {
+								player.heal(444);
+								player.setAbsorptionAmount(666);
+							}
+						}
+						player.fallDistance = 0.0f;
+						if (player.isDead()) {
+							player.getWorld().createExplosion(player, player.getX(), player.getY(), player.getZ(), 100f, World.ExplosionSourceType.MOB);
 						}
 					}
 				}
