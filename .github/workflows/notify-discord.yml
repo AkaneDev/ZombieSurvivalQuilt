@@ -3,7 +3,7 @@ name: Build and Notify Discord
 on:
   push:
     branches:
-      - main # or any branch you want to monitor
+      - master # or any branch you want to monitor
 
 jobs:
   build_and_notify:
