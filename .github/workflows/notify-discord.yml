@@ -42,13 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send commit message and download link to Discord
-        uses: actions/http-client@v2
-        with:
-          url: https://discord.com/api/webhooks/1264522310896058489/h8pzZ2lOHdRraMJiY3-9MRq0wShLYOo9ZudTMs_Z5MsSCfcw3dOHoHgOpQUKrKB5v4O5
-          method: POST
-          headers: |
-            Content-Type: application/json
-          body: |
-            {
-              "content": "Commit message: ${{ steps.get_commit_message.outputs.message }}\n\nDownload the mod: [Minecraft Mod JAR](https://github.com/${{ github.repository }}/releases/latest/download/minecraft-mod.jar)"
-            }
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "Commit message: '${{ steps.get_commit_message.outputs.message }}'\n\nDownload the mod: [Minecraft Mod JAR](https://github.com/'${{ github.repository }}'/releases/latest/download/minecraft-mod.jar)"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
