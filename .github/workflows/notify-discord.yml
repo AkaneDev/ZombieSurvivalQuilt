@@ -48,5 +48,5 @@ jobs:
       - name: Send commit message and download link to Discord
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "Hello, I\'m a bot set up by Akane. Here\'s what he has to say:\nCommit message: FIxed a java sdk\n\nDownload the mod\: \[Minecraft Mod JAR\]\(https://github.com/Akane-Dev/ZombieSurvivalQuilt/releases/latest/download/minecraft-mod.jar \)"}' \
+          -d '{"content": "Hello, I\'m a bot set up by Akane. Here\'s what he has to say:\nCommit message: '${{ steps.get_commit_message.outputs.message }}'\n\nDownload the mod: [Minecraft Mod JAR](https://github.com/'${{ github.repository }}'/releases/latest/download/minecraft-mod.jar)"}' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
