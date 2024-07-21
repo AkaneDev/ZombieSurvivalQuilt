@@ -28,7 +28,10 @@ jobs:
         id: tag
         run: |
           # Create a new tag based on the commit SHA
-          echo "::set-output name=release_tag::UserBuild_$(date +'%Y%m%d%H%M%S')"
+          TAG_NAME="UserBuild_$(date +'%Y%m%d%H%M%S')"
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+          echo "release_tag=$TAG_NAME" >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -36,17 +39,17 @@ jobs:
         if: github.event_name == 'push'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          tag_name: ${{ env.release_tag }}
           files: build/libs/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get the latest commit message
         id: get_commit_message
-        run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
+        run: echo "message=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
 
       - name: Send commit message and download link to Discord
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "Hello, I\'m a bot set up by Akane. Here\'s what he has to say:\nCommit message: '${{ steps.get_commit_message.outputs.message }}'\n\nDownload the mod: [Minecraft Mod JAR](https://github.com/'${{ github.repository }}'/releases/latest/download/minecraft-mod.jar)"}' \
+          -d "{\"content\": \"Hello, I'm a bot set up by Akane. Here's what he has to say:\\nCommit message: ${{ env.message }}\\n\\nDownload the mod: [Minecraft Mod JAR](https://github.com/${{ github.repository }}/releases/latest/download/minecraft-mod.jar)\"}" \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
