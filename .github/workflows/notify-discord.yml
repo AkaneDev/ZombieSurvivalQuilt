@@ -15,8 +15,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17' # or your required Java version
-          distribution: 'adopt-openjdk'
+          java-version: '21' # or your required Java version
+          distribution: 'corretto'
 
       - name: Build Minecraft Mod
         run: |
