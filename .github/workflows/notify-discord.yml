@@ -25,10 +25,10 @@ jobs:
           ./gradlew build
 
       - name: Create Git Tag
-        id: create_tag
+        id: tag
         run: |
           # Create a new tag based on the commit SHA
-          echo "::set-output name=$(date +'%Y%m%d%H%M%S')::UserBuild_$(date +'%Y%m%d%H%M%S')"
+          echo "::set-output name=release_tag::UserBuild_$(date +'%Y%m%d%H%M%S')"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
