@@ -1,4 +1,4 @@
-name: Notify Discord on Commit
+name: Build and Notify Discord
 
 on:
   push:
@@ -6,17 +6,42 @@ on:
       - main # or any branch you want to monitor
 
 jobs:
-  notify:
+  build_and_notify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17' # or your required Java version
+          distribution: 'adopt-openjdk'
+
+      - name: Build Minecraft Mod
+        run: |
+          mkdir -p build/libs
+          ./gradlew build # assuming you are using Gradle
+
+      - name: Upload JAR file as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: minecraft-mod
+          path: build/libs/*.jar
+
       - name: Get the latest commit message
         id: get_commit_message
         run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
 
-      - name: Send commit message to Discord
+      - name: Upload JAR file to GitHub Releases (optional)
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send commit message and download link to Discord
         uses: actions/http-client@v2
         with:
           url: https://discord.com/api/webhooks/1264522310896058489/h8pzZ2lOHdRraMJiY3-9MRq0wShLYOo9ZudTMs_Z5MsSCfcw3dOHoHgOpQUKrKB5v4O5
@@ -25,5 +50,5 @@ jobs:
             Content-Type: application/json
           body: |
             {
-              "content": "${{ steps.get_commit_message.outputs.message }}"
+              "content": "Commit message: ${{ steps.get_commit_message.outputs.message }}\n\nDownload the mod: [Minecraft Mod JAR](https://github.com/${{ github.repository }}/releases/latest/download/minecraft-mod.jar)"
             }
