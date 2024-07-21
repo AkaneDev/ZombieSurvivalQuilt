@@ -28,10 +28,7 @@ jobs:
         id: create_tag
         run: |
           # Create a new tag based on the commit SHA
-          TAG_NAME="v$(date +'%Y%m%d%H%M%S')"
-          git tag $TAG_NAME
-          git push origin $TAG_NAME
-          echo "::set-output name=" + $TAG_NAME
+          echo "::set-output name=$(date +'%Y%m%d%H%M%S')::UserBuild_$(date +'%Y%m%d%H%M%S')"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
