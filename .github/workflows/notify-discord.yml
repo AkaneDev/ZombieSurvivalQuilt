@@ -46,7 +46,11 @@ jobs:
 
       - name: Get the latest commit message
         id: get_commit_message
-        run: echo "MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+        run: |
+          # Fetch the commit message and escape characters for safe use in JSON
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          ESCAPED_COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          echo "::set-output name=message::${ESCAPED_COMMIT_MESSAGE}"
 
       - name: Print environment variables
         run: |
