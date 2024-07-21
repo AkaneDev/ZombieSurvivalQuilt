@@ -46,10 +46,10 @@ jobs:
 
       - name: Get the latest commit message
         id: get_commit_message
-        run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
+        run: echo "message=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
 
       - name: Send commit message and download link to Discord
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"Hello, I'm a bot set up by Akane. Here's what he has to say:\\nCommit message: ${{ env.message }}\\n\\nDownload the mod: [Minecraft Mod JAR](https://github.com/${{ github.repository }}/releases/latest/download/minecraft-mod.jar)\"}" \
+          -d "{\"content\": \"Hello, I'm a bot set up by Akane. Here's what he has to say:\\nCommit message: ${{ env.message }}\\n\\nDownload the mod: [Minecraft Mod JAR](https://github.com/${{ github.repository }}/releases/${{ env.release_tag }}/download/zombiesurvival-1.0.0+1.20.1.jar )\"}" \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
