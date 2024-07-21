@@ -49,5 +49,5 @@ jobs:
       - name: Send commit message and download link to Discord
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "Commit message: '${{ steps.get_commit_message.outputs.message }}'\n\nDownload the mod: [Minecraft Mod JAR](https://github.com/'${{ github.repository }}'/releases/latest/download/minecraft-mod.jar)"}' \
+          -d '{"content": "Hello Im a bot set up by Akane Heres what he has to say: \nCommit message: '${{ steps.get_commit_message.outputs.message }}'\n\nDownload the mod: [Minecraft Mod JAR](https://github.com/'${{ github.repository }}'/releases/latest/download/minecraft-mod.jar)"}' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
