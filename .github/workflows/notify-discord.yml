@@ -1,0 +1,29 @@
+name: Notify Discord on Commit
+
+on:
+  push:
+    branches:
+      - main # or any branch you want to monitor
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get the latest commit message
+        id: get_commit_message
+        run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
+
+      - name: Send commit message to Discord
+        uses: actions/http-client@v2
+        with:
+          url: https://discord.com/api/webhooks/1264522310896058489/h8pzZ2lOHdRraMJiY3-9MRq0wShLYOo9ZudTMs_Z5MsSCfcw3dOHoHgOpQUKrKB5v4O5
+          method: POST
+          headers: |
+            Content-Type: application/json
+          body: |
+            {
+              "content": "${{ steps.get_commit_message.outputs.message }}"
+            }
