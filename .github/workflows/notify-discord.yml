@@ -20,8 +20,9 @@ jobs:
 
       - name: Build Minecraft Mod
         run: |
+          chmod +x ./gradlew  # Add this line to ensure the Gradle wrapper has execute permissions
           mkdir -p build/libs
-          ./gradlew build # assuming you are using Gradle
+          ./gradlew build
 
       - name: Upload JAR file as artifact
         uses: actions/upload-artifact@v3
