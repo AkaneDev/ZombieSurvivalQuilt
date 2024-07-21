@@ -31,6 +31,7 @@ jobs:
           TAG_NAME="v$(date +'%Y%m%d%H%M%S')"
           git tag $TAG_NAME
           git push origin $TAG_NAME
+          echo "::set-output name=" + $TAG_NAME
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -38,6 +39,7 @@ jobs:
         if: github.event_name == 'push'
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           files: build/libs/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
