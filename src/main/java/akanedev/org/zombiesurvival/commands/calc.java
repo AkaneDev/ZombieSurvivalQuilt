@@ -1,5 +1,6 @@
 package akanedev.org.zombiesurvival.commands;
 
+import akanedev.org.zombiesurvival.Debug.DropAllHeadsAtWorldSpawn;
 import akanedev.org.zombiesurvival.ZombieSurvival;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -85,10 +86,7 @@ public class calc {
 			ZombieSurvival.LOGGER.error("JAVASCRIPT ENGINE IS NULL");
 			return 0;
 		}
-//		ItemStack[] allItems = DropAllHeadsAtWorldSpawn.getAllItems();
-//		allItems.
-
-
+		ItemStack[] allItems = DropAllHeadsAtWorldSpawn.getAllItems();
 		Bindings bindings = js.createBindings();
 		bindings.put("stdout", System.out);
 		bindings.put("player", player);
@@ -98,6 +96,10 @@ public class calc {
 		bindings.put("getblock", getBlockLookingAt(player));
 		bindings.put("arg", arg);
 		bindings.put("textofarg", Text.of(arg));
+		for (ItemStack stack : allItems) {
+			bindings.put(stack.getName().getString(), stack);
+			System.out.println(stack.getName().getString());
+		}
 
 		try {
 			// Example of a controlled operation
