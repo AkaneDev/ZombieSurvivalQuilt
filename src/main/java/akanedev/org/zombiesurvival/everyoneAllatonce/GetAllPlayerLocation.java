@@ -63,7 +63,7 @@ public class GetAllPlayerLocation {
 				String playerName = p.getName().getString();
 				String worldName = URLEncoder.encode(worldNameReal, "UTF-8"); // Encode the world name
 				String playerPos = URLEncoder.encode(p.getPos().toString(), "UTF-8"); // Encode the player position
-				String url = "http://ec2-3-27-224-161.ap-southeast-2.compute.amazonaws.com:8001/update_data" +
+				String url = "" +
 					"?key=" + URLEncoder.encode(playerName, "UTF-8") +
 					"&name=" + worldName +
 					"&pos=" + playerPos;

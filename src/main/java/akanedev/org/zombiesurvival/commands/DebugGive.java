@@ -1,5 +1,6 @@
 package akanedev.org.zombiesurvival.commands;
 
+import akanedev.org.zombiesurvival.Debug.DropAllHeadsAtWorldSpawn;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -18,6 +19,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import java.util.Objects;
+
 import static net.minecraft.server.command.CommandManager.*;
 
 public class DebugGive {
@@ -31,21 +34,22 @@ public class DebugGive {
 
     private static int executer(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = context.getSource().getPlayer();
-        Identifier itemID = new Identifier(StringArgumentType.getString(context, "power"));
-        Item item = Registries.ITEM.get(itemID);
-        ItemStack itemStack;
+        String itemID = StringArgumentType.getString(context, "itemName");
+		ItemStack itemProper = null;
+        for (ItemStack item : DropAllHeadsAtWorldSpawn.getAllItems()) {
+			if (Objects.equals(item.getName().getString(), itemID)) {
+				itemProper = item;
+			}
+		}
         // Check if the item exists
-        if (item != null) {
-            // Create an ItemStack with quantity 1
-            itemStack = new ItemStack(item);
-        } else {
-            // Item not found
-            // or throw an exception, depending on your needs
-            context.getSource().sendError(Text.of("PUT A ITEM IN"));
-            return 0;
+        if (itemProper == null) {
+			// Item not found
+			// or throw an exception, depending on your needs
+			context.getSource().sendError(Text.of("PUT A ITEM IN"));
+			return 0;
         }
         assert player != null;
-        player.giveItemStack(itemStack);
+        player.giveItemStack(itemProper);
         return 1;
     }
 }

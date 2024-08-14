@@ -4,10 +4,7 @@ import akanedev.org.zombiesurvival.Debug.DropAllHeadsAtWorldSpawn;
 import akanedev.org.zombiesurvival.Powers.Akane.restless.goodluck;
 import akanedev.org.zombiesurvival.Powers.Gojo.Gojo;
 import akanedev.org.zombiesurvival.Powers.RBD.start_Random_Block_Drops;
-import akanedev.org.zombiesurvival.event.PlayerHealthHandler;
-import akanedev.org.zombiesurvival.event.PlayerTickHandler;
-import akanedev.org.zombiesurvival.event.RespawnListener;
-import akanedev.org.zombiesurvival.event.ServerLoadEvent;
+import akanedev.org.zombiesurvival.event.*;
 import akanedev.org.zombiesurvival.items.OrbitalStrike;
 import akanedev.org.zombiesurvival.mobs.giant_ai;
 import akanedev.org.zombiesurvival.mobs.giant_ai_moreHP;
@@ -30,6 +27,8 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registry;
+import org.quiltmc.qsl.networking.api.ServerPlayConnectionEvents;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
@@ -44,7 +43,7 @@ public class ZombieSurvival implements ModInitializer {
     private static final Path DATA_FILE = CONFIG_DIR.resolve("ZombieSurvivalServerData.properties");
     public static final String modID = "zombiesurvival";
     public static final String modDev = "Akane";
-    public static Boolean _DEBUG = false;
+    public static Boolean _DEBUG = true;
     public static final Logger LOGGER = LogManager.getLogger(modID);
 	public static final Logger DEBUG_LOGGER = LogManager.getLogger("AkaneDev");
 	public static String NBT_KEY = modID + ":clipping";
@@ -122,6 +121,8 @@ public class ZombieSurvival implements ModInitializer {
 			DropAllHeadsAtWorldSpawn.SpawnHeads(server.getOverworld().toServerWorld());
 			new ServerLoadEvent();
 		});
+
+		ServerPlayConnectionEvents.JOIN.register(new PlayerJoinHandler());
 
 		ServerTickEvents.START_SERVER_TICK.register(new PlayerTickHandler());
 

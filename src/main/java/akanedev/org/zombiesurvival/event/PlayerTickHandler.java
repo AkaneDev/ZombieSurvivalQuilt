@@ -75,7 +75,7 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
 						if (!player.isCreative() && !player.isSpectator()) {
 							PlayerInventory inventory = player.getInventory();
 							ItemStack food = new ItemStack(Items.ENCHANTED_GOLDEN_APPLE).setCustomName(Text.of("Apple"));
-							food.setCount(128);
+							food.setCount(1);
 							inventory.offHand.set(0, food);
 						}
 					}
