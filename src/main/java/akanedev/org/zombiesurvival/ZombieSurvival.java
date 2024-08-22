@@ -43,7 +43,7 @@ public class ZombieSurvival implements ModInitializer {
     private static final Path DATA_FILE = CONFIG_DIR.resolve("ZombieSurvivalServerData.properties");
     public static final String modID = "zombiesurvival";
     public static final String modDev = "Akane";
-    public static Boolean _DEBUG = true;
+    public static Boolean _DEBUG = false;
     public static final Logger LOGGER = LogManager.getLogger(modID);
 	public static final Logger DEBUG_LOGGER = LogManager.getLogger("AkaneDev");
 	public static String NBT_KEY = modID + ":clipping";

@@ -21,4 +21,7 @@ public class Ghost {
 			toggleGhost = true;
 		}
 	}
+	public static boolean getGhostActive() {
+		return toggleGhost;
+	}
 }

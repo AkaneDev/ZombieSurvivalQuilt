@@ -1,6 +1,7 @@
 package akanedev.org.zombiesurvival.event;
 
 import akanedev.org.zombiesurvival.Powers.Akane.restless.immortal.toggleableImmortal;
+import akanedev.org.zombiesurvival.Powers.GoThroughWalls.Ghost;
 import akanedev.org.zombiesurvival.Powers.Gojo.Gojo;
 import akanedev.org.zombiesurvival.ZombieSurvival;
 import com.mojang.authlib.GameProfile;
@@ -25,6 +26,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 
 import java.util.Objects;
@@ -89,6 +91,14 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
 						player.fallDistance = 0.0f;
 						if (player.isDead()) {
 							player.getWorld().createExplosion(player, player.getX(), player.getY(), player.getZ(), 100f, World.ExplosionSourceType.MOB);
+						}
+					}
+					if (tag.equalsIgnoreCase("GoingGhost")) {
+						if (Ghost.getGhostActive()) {
+							player.changeGameMode(GameMode.SPECTATOR);
+						}
+						else {
+							player.changeGameMode(GameMode.SURVIVAL);
 						}
 					}
 				}
