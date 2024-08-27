@@ -18,6 +18,17 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 	mavenCentral()
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
 	maven { url = "https://jitpack.io" }
 }
 
@@ -48,12 +59,15 @@ dependencies {
 	}
 	*/
 	modImplementation libs.quilt.loader
-
 	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
 	// Quilted Fabric API will automatically pull in the correct QSL version.
 	modImplementation libs.quilted.fabric.api
+//	implementation "maven.modrinth:porting_lib:2.3.4+1.20.1"
 	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
-
+//	implementation "maven.modrinth:cardinal-components-api:5.2.2"
+//	modImplementation files('libs/lodestone.jar')
+//	implementation files('libs/cardinal.jar')
+//	implementation "maven.modrinth:lodestonelib:VR2ATc0s"
 	// Dependencies
 	implementation libs.rhino.run
 	implementation libs.rhino.engine
@@ -101,7 +115,7 @@ shadowJar {
 	dependencies {
 		include(dependency('org.mozilla:rhino:1.7.15'))
 		include(dependency('org.mozilla:rhino-engine:1.7.15'))
-//		include(dependency(files("libs/lodestone-0.0.2+1.19.5.jar")))
+//		include(dependency('maven.modrinth:lodestonelib:VR2ATc0s'))
 	}
 }
 
