@@ -10,6 +10,7 @@ import akanedev.org.zombiesurvival.mobs.giant_ai;
 import akanedev.org.zombiesurvival.mobs.giant_ai_moreHP;
 import net.akane.akanemaths.MathEvaluator;
 import akanedev.org.zombiesurvival.commands.*;
+import net.minecraft.SharedConstants;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -68,6 +69,7 @@ public class ZombieSurvival implements ModInitializer {
 
 	@Override
 	public void onInitialize(ModContainer mod) {
+//		SharedConstants.isDevelopment = true;
 		if (QuiltLoader.isDevelopmentEnvironment()) {
 			_DEBUG = true;
 		}
