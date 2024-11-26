@@ -22,7 +22,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Build Minecraft Mod
-        run: gradlew build
+        run: gradle build
 
       - name: Create Git Tag
         id: tag
