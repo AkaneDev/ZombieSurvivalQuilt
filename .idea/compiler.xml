@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="22">
+      <module name="ZombieSurvival.client" target="21" />
+      <module name="ZombieSurvival.main" target="21" />
+      <module name="ZombieSurvival.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
