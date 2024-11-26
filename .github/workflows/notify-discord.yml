@@ -21,6 +21,12 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Initialize and Install Plugins
+        run: |
+          gradle wrapper --gradle-version 8.3 # Update to your Gradle version if necessary
+          gradle --refresh-dependencies
+          gradle tasks # Verifies plugin installation by listing tasks
+
       - name: Build Minecraft Mod
         run: gradle build
 
