@@ -1,0 +1,64 @@
+name: Build and Notify Discord
+
+on:
+  push:
+    branches:
+      - master # or any branch you want to monitor
+
+jobs:
+  build_and_notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21' # or your required Java version
+          distribution: 'corretto'
+
+      - name: Build Minecraft Mod
+        run: |
+          chmod +x ./gradlew  # Ensure gradlew is executable
+          mkdir -p build/libs
+          ./gradlew build
+
+      - name: Create Git Tag
+        id: tag
+        run: |
+          # Create a new tag based on the commit SHA
+          TAG_NAME="UserBuild_$(date +'%Y%m%d%H%M%S')"
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+          echo "release_tag=$TAG_NAME" >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload JAR file to GitHub Releases
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.release_tag }}
+          files: build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get the latest commit message
+        id: get_commit_message
+        run: |
+          # Fetch the commit message and escape characters for safe use in JSON
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          ESCAPED_COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          echo "::set-output name=message::${ESCAPED_COMMIT_MESSAGE}"
+
+      - name: Print environment variables
+        run: |
+          echo "MESSAGE=${{ env.MESSAGE }}"
+          echo "RELEASE_TAG=${{ env.RELEASE_TAG }}"
+
+      - name: Send commit message and download link to Discord
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"Hello, I'm a bot set up by Akane. Here's what he has to say:\\nCommit message: ${{ steps.get_commit_message.outputs.message }}\\n\\nDownload the mod: [ZombieSurvival Mod JAR](https://github.com/${{ github.repository }}/releases/download/${{ env.release_tag }}/zombiesurvival-1.0.0+1.20.1.jar )\n ModLoader: [Quilt](https://quiltmc.org/en/install/client/)\"}" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
