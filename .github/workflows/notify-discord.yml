@@ -23,8 +23,6 @@ jobs:
 
       - name: Build Minecraft Mod
         run: |
-          chmod +x ./gradlew  # Ensure gradlew is executable
-          mkdir -p build/libs
           ./gradlew build
 
       - name: Create Git Tag
