@@ -23,7 +23,6 @@ jobs:
 
       - name: Initialize and Install Plugins
         run: |
-          gradle wrapper --gradle-version 8.3 # Update to your Gradle version if necessary
           gradle --refresh-dependencies
           gradle tasks # Verifies plugin installation by listing tasks
 
