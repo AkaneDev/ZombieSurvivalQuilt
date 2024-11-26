@@ -18,6 +18,9 @@ jobs:
           java-version: '21' # or your required Java version
           distribution: 'corretto'
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Build Minecraft Mod
         run: |
           chmod +x ./gradlew  # Ensure gradlew is executable
