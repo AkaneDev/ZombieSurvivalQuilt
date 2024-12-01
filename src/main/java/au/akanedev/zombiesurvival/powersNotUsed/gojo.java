@@ -1,21 +1,14 @@
-package au.akanedev.zombiesurvival.powers;
+package au.akanedev.zombiesurvival.powersNotUsed;
 
 import au.akanedev.zombiesurvival.Zombiesurvival;
-import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
-import net.minecraft.advancements.critereon.EntityTypePredicate;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.List;
 import java.util.Objects;
-import javax.swing.*;
 
 public class gojo {
     private Vec3 Size;
