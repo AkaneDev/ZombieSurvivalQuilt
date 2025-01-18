@@ -1,9 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "au.akanedev.zombiesurvival.mixin",
+  "package": "au.akanedev.zombiesurvival.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ZombieMixin"
   ],
   "injectors": {
     "defaultRequire": 1

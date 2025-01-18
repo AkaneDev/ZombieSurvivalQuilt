@@ -6,8 +6,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.Map;
+
 public class GojoPower implements Power {
     private boolean active = false;
+    String name = "Gojo";
 
     @Override
     public void activate(ServerPlayer player) {
@@ -38,5 +41,20 @@ public class GojoPower implements Power {
     @Override
     public boolean isActive() {
         return active;
+    }
+
+    @Override
+    public String getPowerName() {
+        return this.name;
+    }
+
+    @Override
+    public Map<String, Map<String, String>> getEffects() {
+        return Map.of();
+    }
+
+    @Override
+    public void setEffects(Map<String, Map<String, String>> effects) {
+
     }
 }

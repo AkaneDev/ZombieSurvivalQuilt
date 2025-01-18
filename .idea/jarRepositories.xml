@@ -56,5 +56,25 @@
       <option name="name" value="Modrinth" />
       <option name="url" value="https://api.modrinth.com/maven" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="ParchmentMC" />
+      <option name="name" value="ParchmentMC" />
+      <option name="url" value="https://maven.parchmentmc.org" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="ladysnake" />
+      <option name="name" value="ladysnake" />
+      <option name="url" value="https://maven.ladysnake.org/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="devos one (PortingLib Container)" />
+      <option name="name" value="devos one (PortingLib Container)" />
+      <option name="url" value="https://mvn.devos.one/releases/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Jamies White Shirt" />
+      <option name="name" value="Jamies White Shirt" />
+      <option name="url" value="https://maven.jamieswhiteshirt.com/libs-release" />
+    </remote-repository>
   </component>
 </project>

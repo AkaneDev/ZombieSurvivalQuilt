@@ -33,30 +33,79 @@ repositories {
         name = 'BlameJared Maven (CrT / Bookshelf)'
         url = 'https://maven.blamejared.com'
     }
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org'
+    }
+    maven{
+        name = 'ladysnake'
+        url = 'https://maven.ladysnake.org/releases'
+    }
+    maven {
+        name = "devos one (PortingLib Container)"
+        url = "https://mvn.devos.one/releases/"
+    }
+    maven {
+        name = "Jamies White Shirt"
+        url = "https://maven.jamieswhiteshirt.com/libs-release"
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
 //    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    mappings loom.officialMojangMappings()
-    modImplementation("foundry.veil:Veil-fabric-${project.minecraft_version}-quasar:${project.veil_version}") {
-        exclude group: "maven.modrinth"
+    mappings(loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+    })
+//    modImplementation("foundry.veil:Veil-fabric-${project.minecraft_version}:${project.veil_version}") {
+//        exclude group: "maven.modrinth"
+//    }
+
+    modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+    modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+    modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${project.cca_version}"
+
+    def portLibModules = project.findProperty('port_lib_modules')?.split(',') ?: []
+
+    portLibModules.each { module ->
+        include("io.github.fabricators_of_create.Porting-Lib:${module}:${project.port_lib_version}")
+        modApi("io.github.fabricators_of_create.Porting-Lib:${module}:${project.port_lib_version}")
     }
+    modImplementation "maven.modrinth:porting_lib:${project.portinglib_ver}"
+    modApi "maven.modrinth:porting_lib:${project.portinglib_ver}"
+    modImplementation "maven.modrinth:lodestonelib:${project.lodestone_version}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${property("cca_version")}"
+    modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${property("cca_version")}"
+    modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${property("cca_version")}"
+    compileOnly "maven.modrinth:sodium:${project.sodium_version}"
+    compileOnly "maven.modrinth:iris:${project.iris_version}"
 }
 
 processResources {
     inputs.property "version", project.version
-    inputs.property "minecraft_version", project.minecraft_version
-    inputs.property "loader_version", project.loader_version
+    inputs.property "minecraft_version", minecraft_version
+    inputs.property "loader_version", loader_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
-                "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
+                "minecraft_version": minecraft_version,
+                "loader_version": loader_version
     }
 }
 

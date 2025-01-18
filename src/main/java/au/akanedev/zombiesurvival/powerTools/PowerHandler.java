@@ -1,5 +1,6 @@
 package au.akanedev.zombiesurvival.powerTools;
 
+import au.akanedev.zombiesurvival.Zombiesurvival;
 import au.akanedev.zombiesurvival.powers.GojoPower;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;

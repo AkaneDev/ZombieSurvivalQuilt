@@ -1,5 +1,6 @@
 package au.akanedev.zombiesurvival.powerTools;
 
+import au.akanedev.zombiesurvival.Zombiesurvival;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -12,6 +13,9 @@ public class PowerManager {
 
     // Register a power for a player
     public void registerPower(ServerPlayer player, String powerName, Power power) {
+        Zombiesurvival.LOGGER.info("Registered A Player called: {}", player.getName().getString());
+        Zombiesurvival.LOGGER.info("Player Got Power Called called: {}", powerName);
+        Zombiesurvival.LOGGER.info("Internal Power Name: {}", power.getPowerName());
         UUID playerId = player.getUUID();
         playerPowers.putIfAbsent(playerId, new HashMap<>());
         playerPowers.get(playerId).put(powerName, power);
