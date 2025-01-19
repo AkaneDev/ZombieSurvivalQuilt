@@ -1,5 +1,7 @@
 package au.akanedev.zombiesurvival;
 
+//TODO: Add the end forge structure and the end forge block
+
 import au.akanedev.zombiesurvival.Spawning.spawning;
 import au.akanedev.zombiesurvival.commands.PowerCommands;
 import au.akanedev.zombiesurvival.powerTools.Power;
