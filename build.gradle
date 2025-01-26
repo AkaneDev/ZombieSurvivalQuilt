@@ -143,6 +143,7 @@ tasks.withType(ShadowJar).configureEach {
     dependencies {
         exclude(dependency("net.fabricmc:fabric-loader"))
         exclude(dependency("net.fabricmc.fabric-api:fabric-api"))
+        exclude(dependency("org.spongepowered.asm.mixin:mixin"))
     }
 }
 
