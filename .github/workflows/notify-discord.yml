@@ -69,5 +69,5 @@ jobs:
       - name: Send commit message and download link to Discord
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"Hello, I'm a bot set up by Akane. Here's what he has to say:\\nCommit message: ${{ steps.get_commit_message.outputs.message }}\\n\\nDownload the mod: [ZombieSurvival Mod JAR](https://github.com/${{ github.repository }}/releases/download/${{ env.release_tag }}/zombiesurvival-1.0.0+1.20.1.jar )\n ModLoader: [Fabric](${{ env.URLforModloader }})\n Version: 1.20.1 \n [Github](${{ env.GithubURL }})\"}" \
+          -d "{\"content\": \"Hello, I'm a bot set up by Akane. Here's what he has to say:\\nCommit message: ${{ steps.get_commit_message.outputs.message }}\\n\\nDownload the mod: [ZombieSurvival Mod JAR](https://github.com/${{ github.repository }}/releases/download/${{ env.release_tag }}/ZombieSurvival-1.0.0-shadow.jar )\n ModLoader: [Fabric](${{ env.URLforModloader }})\n Version: 1.20.1 \n [Github](${{ env.GithubURL }})\"}" \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
