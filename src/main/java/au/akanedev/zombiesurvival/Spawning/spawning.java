@@ -3,11 +3,12 @@ package au.akanedev.zombiesurvival.Spawning;
 
 import au.akanedev.zombiesurvival.Zombiesurvival;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.network.chat.Component;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.level.Level;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.world.World;
+
 
 import java.util.List;
 import java.util.Random;
@@ -24,16 +25,16 @@ public class spawning {
             if (current <= 0) {
                 int number = rand.nextInt(11);
                 if (number == 1) {
-                    List<ServerPlayer> players = server.getPlayerList().getPlayers();
-                    for (ServerPlayer player : players) {
-                        Level world = player.getCommandSenderWorld();
-                        Zombie zombie = new Zombie(world);
+                    List<ServerPlayerEntity> players = server.getPlayerManager().getPlayerList();
+                    for (ServerPlayerEntity player : players) {
+                        World world = player.getServerWorld();
+                        ZombieEntity zombie = new ZombieEntity(world);
                         zombie.setPos(player.getX(), player.getY(), player.getZ());
-                        world.addFreshEntity(zombie);
+                        world.spawnEntity(zombie);
                         if (player.getName().getString().contains("AkaneDev") || FabricLoader.getInstance().isDevelopmentEnvironment()) {
                             Zombiesurvival.LOGGER.info("Spawning");
-                            player.sendSystemMessage(Component.literal("Spawning"));
-                            player.sendSystemMessage(Component.literal("Time Between Spawns in ticks: " + maxtimeTick * 60 + ", in Seconds: " + maxtimeTick));
+                            player.sendMessage(Text.literal("Spawning"));
+                            player.sendMessage(Text.literal("Time Between Spawns in ticks: " + maxtimeTick * 60 + ", in Seconds: " + maxtimeTick));
                             Zombiesurvival.LOGGER.info("Time Between Spawns in ticks: " + maxtimeTick * 60 + ", in Seconds: " + maxtimeTick);
                         }
                     }

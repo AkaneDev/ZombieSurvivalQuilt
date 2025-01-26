@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version '1.8-SNAPSHOT'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 version = project.mod_version
@@ -65,14 +66,7 @@ repositories {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-//    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    mappings(loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
-    })
-//    modImplementation("foundry.veil:Veil-fabric-${project.minecraft_version}:${project.veil_version}") {
-//        exclude group: "maven.modrinth"
-//    }
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 
     modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
     modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
@@ -85,6 +79,9 @@ dependencies {
         modApi("io.github.fabricators_of_create.Porting-Lib:${module}:${project.port_lib_version}")
     }
     modImplementation "maven.modrinth:porting_lib:${project.portinglib_ver}"
+    modApi "maven.modrinth:bits-and-chisels:${project.bits_and_chisels_version}"
+    modImplementation "maven.modrinth:fabric-custom-names:${project.custom_names_version}"
+    modImplementation "maven.modrinth:fabric-permissions-api:${project.fabric_permissions_api_version}"
     modApi "maven.modrinth:porting_lib:${project.portinglib_ver}"
     modImplementation "maven.modrinth:lodestonelib:${project.lodestone_version}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -137,6 +134,22 @@ jar {
         rename { "${it}_${project.archivesBaseName}" }
     }
 }
+
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+tasks.withType(ShadowJar).configureEach {
+    archiveClassifier.set('')
+    configurations = [project.configurations.runtimeClasspath]
+    dependencies {
+        exclude(dependency("net.fabricmc:fabric-loader"))
+        exclude(dependency("net.fabricmc.fabric-api:fabric-api"))
+    }
+}
+
+tasks.named('remapJar') {
+    dependsOn(tasks.named('shadowJar'))
+}
+
 
 // configure the maven publication
 publishing {

@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "zombiesurvival:block/lava_melted_end_stone_side",
+      "uvlock": true
+    },
+    "facing=east": {
+      "model": "zombiesurvival:block/lava_melted_end_stone_side",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south": {
+      "model": "zombiesurvival:block/lava_melted_end_stone_side",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "zombiesurvival:block/lava_melted_end_stone_side",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

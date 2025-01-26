@@ -2,7 +2,7 @@ package au.akanedev.zombiesurvival.powerTools;
 
 import au.akanedev.zombiesurvival.Zombiesurvival;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,18 +12,18 @@ public class PowerManager {
     private final Map<UUID, Map<String, Power>> playerPowers = new HashMap<>();
 
     // Register a power for a player
-    public void registerPower(ServerPlayer player, String powerName, Power power) {
+    public void registerPower(ServerPlayerEntity player, String powerName, Power power) {
         Zombiesurvival.LOGGER.info("Registered A Player called: {}", player.getName().getString());
         Zombiesurvival.LOGGER.info("Player Got Power Called called: {}", powerName);
         Zombiesurvival.LOGGER.info("Internal Power Name: {}", power.getPowerName());
-        UUID playerId = player.getUUID();
+        UUID playerId = player.getUuid();
         playerPowers.putIfAbsent(playerId, new HashMap<>());
         playerPowers.get(playerId).put(powerName, power);
     }
 
     // Activate a specific power for a player
-    public void activatePower(ServerPlayer player, String powerName) {
-        Map<String, Power> powers = playerPowers.get(player.getUUID());
+    public void activatePower(ServerPlayerEntity player, String powerName) {
+        Map<String, Power> powers = playerPowers.get(player.getUuid());
         if (powers != null) {
             Power power = powers.get(powerName);
             if (power != null && !power.isActive()) {
@@ -33,8 +33,8 @@ public class PowerManager {
     }
 
     // Deactivate a specific power for a player
-    public void deactivatePower(ServerPlayer player, String powerName) {
-        Map<String, Power> powers = playerPowers.get(player.getUUID());
+    public void deactivatePower(ServerPlayerEntity player, String powerName) {
+        Map<String, Power> powers = playerPowers.get(player.getUuid());
         if (powers != null) {
             Power power = powers.get(powerName);
             if (power != null && power.isActive()) {
@@ -46,8 +46,8 @@ public class PowerManager {
     // Tick powers for all players
     public void tick(MinecraftServer server) {
         if (server != null) {
-            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-                Map<String, Power> powers = playerPowers.get(player.getUUID());
+            for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                Map<String, Power> powers = playerPowers.get(player.getUuid());
                 if (powers != null) {
                     for (Power power : powers.values()) {
                         power.tick(player); // Tick all active powers for this player
@@ -58,12 +58,12 @@ public class PowerManager {
     }
 
     // Get all powers for a player
-    public Map<String, Power> getPlayerPowers(ServerPlayer player) {
-        return playerPowers.getOrDefault(player.getUUID(), new HashMap<>());
+    public Map<String, Power> getPlayerPowers(ServerPlayerEntity player) {
+        return playerPowers.getOrDefault(player.getUuid(), new HashMap<>());
     }
 
     // Remove all powers for a player when they leave
-    public void removePlayerPowers(ServerPlayer player) {
-        playerPowers.remove(player.getUUID());
+    public void removePlayerPowers(ServerPlayerEntity player) {
+        playerPowers.remove(player.getUuid());
     }
 }

@@ -7,12 +7,7 @@ import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.server.command.ServerCommandSource;
 import team.lodestar.lodestone.*;
 
 import static com.mojang.brigadier.builder.LiteralArgumentBuilder.literal;
@@ -21,13 +16,13 @@ import static com.mojang.brigadier.builder.RequiredArgumentBuilder.argument;
 public class PowerCommands {
     public static void registerCommands() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-            dispatcher.register(LiteralArgumentBuilder.<CommandSourceStack>literal("Activate")
+            dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("Activate")
                     .executes(basicGlobalCommandHandlers::basiccommandHandler)
             );
-            dispatcher.register(LiteralArgumentBuilder.<CommandSourceStack>literal("lodestoneTest")
+            dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("lodestoneTest")
             .executes(basicGlobalCommandHandlers::lodeStoneHandler));
 
-            dispatcher.register(LiteralArgumentBuilder.<CommandSourceStack>literal("ZombieSurvival")
+            dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("ZombieSurvival")
                     .then(commandEnable.registerEnable())
                     .then(commandEnable.registerDisable())
                     .then(commandEnable.registerSetSpawnTime())

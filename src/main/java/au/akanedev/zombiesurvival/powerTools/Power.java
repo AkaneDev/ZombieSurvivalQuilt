@@ -1,13 +1,13 @@
 package au.akanedev.zombiesurvival.powerTools;
 
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.Map;
 
 public interface Power {
-    void activate(ServerPlayer player);
-    void deactivate(ServerPlayer player);
-    void tick(ServerPlayer player);
+    void activate(ServerPlayerEntity player);
+    void deactivate(ServerPlayerEntity player);
+    void tick(ServerPlayerEntity player);
     String name = "NotAssigned";
     boolean isActive();
     String getPowerName();
