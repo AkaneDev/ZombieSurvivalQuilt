@@ -138,7 +138,7 @@ jar {
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 tasks.withType(ShadowJar).configureEach {
-    archiveClassifier.set('')
+    archiveClassifier.set('shadow')
     configurations = [project.configurations.runtimeClasspath]
     dependencies {
         exclude(dependency("net.fabricmc:fabric-loader"))
@@ -146,10 +146,13 @@ tasks.withType(ShadowJar).configureEach {
     }
 }
 
+// Ensure remapJar depends on shadowJar and uses its output
 tasks.named('remapJar') {
     dependsOn(tasks.named('shadowJar'))
+    doLast {
+        from(tasks.named('shadowJar').get().archiveFile.get().asFile)
+    }
 }
-
 
 // configure the maven publication
 publishing {
