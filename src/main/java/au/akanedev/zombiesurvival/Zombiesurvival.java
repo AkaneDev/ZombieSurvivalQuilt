@@ -12,9 +12,9 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -82,9 +82,9 @@ public class Zombiesurvival implements ModInitializer {
 
     public void eventJoin() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            ServerPlayer player = handler.getPlayer();
+            ServerPlayerEntity player = handler.getPlayer();
             if (FabricLoader.getInstance().isDevelopmentEnvironment()){
-                player.sendSystemMessage(Component.literal("Config Details: " + spawnHelper.enabled + ", MaxTimeInTicks: " + spawnHelper.maxtimeTick * 60 + ", MaxtimeSeconds: " + spawnHelper.maxtimeTick));
+                player.sendMessage(Text.literal("Config Details: " + spawnHelper.enabled + ", MaxTimeInTicks: " + spawnHelper.maxtimeTick * 60 + ", MaxtimeSeconds: " + spawnHelper.maxtimeTick));
             }
             // Send a message to the player
 //            player.sendSystemMessage(Component.literal("Welcome to the server, " + player.getName().getString() + "!"), false);
